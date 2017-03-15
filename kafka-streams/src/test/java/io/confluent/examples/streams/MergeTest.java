@@ -26,12 +26,15 @@ import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.KGroupedStream;
+
 import org.apache.kafka.test.TestUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.validator.PublicClassValidator;
-
+import org.apache.kafka.common.serialization.BytesSerializer;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
 
@@ -40,9 +43,17 @@ import java.util.List;
 import java.util.Properties;
 import java.util.*;
 
+import java.io.Closeable;
+import java.nio.charset.Charset;
+import java.util.Locale;
+import java.util.Map;
+
 
 import io.confluent.examples.streams.kafka.EmbeddedSingleNodeKafkaCluster;
-import junit.framework.Assert;
+
+
+import java.util.regex.Pattern;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -81,62 +92,72 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    List<KeyValue<String, User>> people = Arrays.asList(
+    List<User> inputValues = Arrays.asList(
         //new KeyValue<>("1", new User("1", 25, null)),
-        new KeyValue<>("1", new User("1", 25, "123 fake street"))
+        new User("1", 25, "123 fake street")
     );
 
-    List<KeyValue<String, User>> expectedMergedUsers = Arrays.asList(
-        new KeyValue<>("1", new User("1", 25, "123 fake street"))
-    );
+    // List<KeyValue<String, User>> expectedMergedUsers = Arrays.asList(
+    //     new KeyValue<>("1", new User("1", 25, "123 fake street"))
+    // );
+
+    List<KeyValue<String, Long>> expectedMergedUsers = Arrays.asList(new KeyValue<>("1", 1L));
 
     //
     // Step 1: Configure and start the processor topology.
     //
     final Serde<String> stringSerde = Serdes.String();
+    final Serde<Long> longSerde = Serdes.Long();
     final Serde<User> userSerde = new UserSerde();
 
-    User user = new User("1", 25, "123 fake street");
+    Properties streamsConfiguration = new Properties();
+    streamsConfiguration.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-lambda-integration-test");
+    streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
+    streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+    streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG,  new UserSerde().getClass().getName());
+    // The commit interval for flushing records to state stores and downstream must be lower than
+    // this integration test's timeout (30 secs) to ensure we observe the expected processing results.
+    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
+    streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    // Use a temporary directory for storing state, which will be automatically removed after the test.
+    streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
-    Serializer<User> ser = userSerde.serializer();
 
-    byte[] bytes = ser.serialize(null, user);
-    User deserUser = userSerde.deserializer().deserialize(null, bytes);
+    KStreamBuilder builder = new KStreamBuilder();
 
-    System.out.print("\n nhs num:" + user.NhsNumber);
-    System.out.print("\n age:" + user.Age);
+    KTable<String, Long> users = builder.stream(stringSerde, userSerde, inputTopic)
+                                            .groupBy((key, value) -> value.NhsNumber)
+                                            .count("user-store");
 
-    System.out.print("\n address:" + user.Address);
-    System.out.print("\n\n");
+    users.to(stringSerde, longSerde, outputTopic);
+
+    KafkaStreams streams = new KafkaStreams(builder, streamsConfiguration);
+    streams.start();
     
-    Assert.assertEquals(user.Address, deserUser.Address);
-    Assert.assertEquals(user.Age, deserUser.Age);
-    Assert.assertEquals(user.NhsNumber, deserUser.NhsNumber);
-    
-  }
-  class UserSerde implements Serde<User>{
+    //
+    // Step 2: Produce some input data to the input topic.
+    //
+    Properties producerConfig = new Properties();
+    producerConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
+    producerConfig.put(ProducerConfig.ACKS_CONFIG, "all");
+    producerConfig.put(ProducerConfig.RETRIES_CONFIG, 0);
+    producerConfig.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    producerConfig.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, UserSerializer.class);
+    IntegrationTestUtils.produceValuesSynchronously(inputTopic, inputValues, producerConfig);
 
-    @Override
-      
-     public  void configure(Map<String, ?> configs, boolean isKey){}
+    //
+    // Step 3: Verify the application's output data.
+    //
+    Properties consumerConfig = new Properties();
+    consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
+    consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, "wordcount-lambda-integration-test-standard-consumer");
+    consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+    List<KeyValue<String, Long>> actualOutput = IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig,
+        outputTopic, inputValues.size());
+    streams.close();
+    assertThat(actualOutput).containsExactlyElementsOf(expectedMergedUsers);
 
-    /**
-     * Close this serde class, which will close the underlying serializer and deserializer.
-     * This method has to be idempotent because it might be called multiple times.
-     */
-    @Override
-    public void close(){
-
-    }
-
-    @Override
-    public Serializer<User> serializer(){
-        return new UserSerializer();
-    }
-
-    @Override
-    public Deserializer<User> deserializer(){
-        return new UserSerializer();
-    }
   }
 }
