@@ -1,0 +1,123 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building streams-examples 3.2.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.10:add-source (add-source) @ streams-examples ---
+[INFO] Source directory: /home/jamie/Git/KafkaExamples/kafka-streams/src/main/scala added.
+[INFO] 
+[INFO] --- avro-maven-plugin:1.7.7:schema (default) @ streams-examples ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ streams-examples ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ streams-examples ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- scala-maven-plugin:3.2.1:compile (default) @ streams-examples ---
+[WARNING]  Expected all dependencies to require Scala version: 2.11.8
+[WARNING]  io.confluent:streams-examples:3.2.0 requires scala version: 2.11.8
+[WARNING]  org.apache.kafka:kafka_2.11:0.10.2.0-cp1 requires scala version: 2.11.8
+[WARNING]  org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 requires scala version: 2.11.6
+[WARNING] Multiple versions of scala libraries detected!
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.10:add-test-source (add-test-source) @ streams-examples ---
+[INFO] Test Source directory: /home/jamie/Git/KafkaExamples/kafka-streams/src/test/scala added.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ streams-examples ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/jamie/Git/KafkaExamples/kafka-streams/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:testCompile (default-testCompile) @ streams-examples ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 32 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes
+[INFO] 
+[INFO] --- scala-maven-plugin:3.2.1:testCompile (default) @ streams-examples ---
+[WARNING]  Expected all dependencies to require Scala version: 2.11.8
+[WARNING]  io.confluent:streams-examples:3.2.0 requires scala version: 2.11.8
+[WARNING]  org.apache.kafka:kafka_2.11:0.10.2.0-cp1 requires scala version: 2.11.8
+[WARNING]  org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 requires scala version: 2.11.6
+[WARNING] Multiple versions of scala libraries detected!
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ streams-examples ---
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running io.confluent.examples.streams.MergeTest
+[2017-03-16 13:51:47,935] WARN [main] No meta.properties file under dir /tmp/junit4376195842331863217/junit1197345412779186376/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-16 13:51:48,152] WARN [main] No meta.properties file under dir /tmp/junit4376195842331863217/junit1197345412779186376/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-16 13:51:48,358] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-16 13:51:48,362] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-16 13:51:48,380] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
+[2017-03-16 13:51:48,797] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+expected -- 
+USER: 11,60,e8320677-5a8a-4228-8ad9-780fd34c63ba
+USER: 12,30,2106a147-2e35-410b-bdd4-736c799e460c
+USER: 13,67,fe6df149-dfd5-4c92-8b20-d987ddae8469
+USER: 14,97,65f83e6f-c29e-4c69-a0dc-d64201c60d5e
+USER: 0,21,507c3209-9c2d-47c2-871e-2de5237ac9c1
+USER: 1,96,8478805c-dc3b-4224-9581-210a82d908fb
+USER: 2,null,97c9cd51-bd43-4511-9cc7-b0401d52f4b0
+USER: 3,91,0b6c0178-b3fb-4d18-9eda-975870a206a4
+USER: 4,54,070fa212-5131-4ccd-9dc0-57e3c024975c
+USER: 5,33,a3b854f4-718c-41f5-953f-cb9ca3e4446c
+USER: 6,21,0abc861d-b5e4-47fc-bd80-4dfeff2377e8
+USER: 7,81,53c3e94c-3453-436f-a6cc-7b47f881d141
+USER: 8,16,bef58de2-be5a-405b-94c8-1faca2db7170
+USER: 9,53,072a1db9-eb71-426d-bdb1-8435ffcac47f
+USER: 10,46,d444ee77-4a69-40b0-8e04-c6fade52d06d
+
+output count = 15
+
+dict count = 15
+Actual:
+USER: 11,60,e8320677-5a8a-4228-8ad9-780fd34c63ba
+USER: 12,30,2106a147-2e35-410b-bdd4-736c799e460c
+USER: 13,67,fe6df149-dfd5-4c92-8b20-d987ddae8469
+USER: 14,97,65f83e6f-c29e-4c69-a0dc-d64201c60d5e
+USER: 0,21,507c3209-9c2d-47c2-871e-2de5237ac9c1
+USER: 1,96,8478805c-dc3b-4224-9581-210a82d908fb
+USER: 2,null,97c9cd51-bd43-4511-9cc7-b0401d52f4b0
+USER: 3,91,0b6c0178-b3fb-4d18-9eda-975870a206a4
+USER: 4,54,070fa212-5131-4ccd-9dc0-57e3c024975c
+USER: 5,33,a3b854f4-718c-41f5-953f-cb9ca3e4446c
+USER: 6,21,0abc861d-b5e4-47fc-bd80-4dfeff2377e8
+USER: 7,81,53c3e94c-3453-436f-a6cc-7b47f881d141
+USER: 8,16,bef58de2-be5a-405b-94c8-1faca2db7170
+USER: 9,53,072a1db9-eb71-426d-bdb1-8435ffcac47f
+USER: 10,46,d444ee77-4a69-40b0-8e04-c6fade52d06d
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.278 sec <<< FAILURE! - in io.confluent.examples.streams.MergeTest
+shouldMergeOnNhsNumber(io.confluent.examples.streams.MergeTest)  Time elapsed: 7.216 sec  <<< ERROR!
+java.lang.NullPointerException
+	at io.confluent.examples.streams.MergeTest.shouldMergeOnNhsNumber(MergeTest.java:102)
+
+
+Results :
+
+Tests in error: 
+  MergeTest.shouldMergeOnNhsNumber:102 » NullPointer
+
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 15.949 s
+[INFO] Finished at: 2017-03-16T13:51:57+00:00
+[INFO] Final Memory: 38M/607M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project streams-examples: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /home/jamie/Git/KafkaExamples/kafka-streams/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

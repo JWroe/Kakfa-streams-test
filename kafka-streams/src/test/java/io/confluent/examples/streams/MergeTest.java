@@ -2,31 +2,23 @@ package io.confluent.examples.streams;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.Deserializer;
-import org.apache.kafka.common.serialization.Serde;
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.common.serialization.*;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
-import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.*;
 
 import org.apache.kafka.test.TestUtils;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 import java.util.stream.*;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import java.nio.file.*;
-
 
 import io.confluent.examples.streams.kafka.EmbeddedSingleNodeKafkaCluster;
 
@@ -48,8 +40,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpeKVujn.tmp";
-    final String expectedFile = "/tmp/tmphelKBG.tmp";
+    final String inputFile = "/tmp/tmpUe8XsV.tmp";
+    final String expectedFile = "/tmp/tmpcukva0.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -58,14 +50,14 @@ public class MergeTest {
       stream.forEach((line) -> inputValues.add(personDes.deserialize(line)));
     }
 
-    List<KeyValue<String, Person>> expectedOutput = new ArrayList<>();
+    Map<String, Person> expectedOutput = new HashMap<>();
     try (Stream<String> stream = Files.lines(Paths.get(expectedFile))) {
-      stream.forEach((line) -> expectedOutput.add(new KeyValue<>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line))));
+      stream.forEach((line) -> updateDict(new KeyValue<String, Person>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line)), expectedOutput));
     }
 
-    //System.out.println("expected -- ");
-    //expectedOutput.forEach((item) -> System.out.println(item));
-    //System.out.println();
+    System.out.println("expected -- ");
+    expectedOutput.forEach((key, val) -> System.out.println(val));
+    System.out.println();
 
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
@@ -76,7 +68,7 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, new PersonSerde().getClass().getName());
-    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
+    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 100);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
@@ -84,7 +76,7 @@ public class MergeTest {
 
     KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
         .groupBy((key, value) -> value.NhsNumber)
-        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
+       .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
             nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
     //users.foreach((key, value) -> System.out.println("\n\ninput - value = " + value));
@@ -98,15 +90,37 @@ public class MergeTest {
 
     produceInputData(inputValues);
 
-    List<KeyValue<String, Person>> actualOutput = getOutputData(expectedOutput);
+    Thread.sleep(5000);
+
+    List<KeyValue<String, Person>> actualOutput = getOutputData(0);
+
+    Map<String, Person> latest = getJustLatestValues(actualOutput);
+
+    System.out.println("Actual:");
+    latest.forEach((key, value) -> System.out.println(value));
+
+    assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
 
     streams.close();
+    
+  }
 
-    //System.out.println("output -- ");
-    //actualOutput.forEach((item) -> System.out.println(item));
-    //System.out.println();
+  public <T1, T2> Map<T1, T2> getJustLatestValues(List<KeyValue<T1, T2>> actualOutput) {
+    Map<T1, T2> dict = new HashMap<>();
+    actualOutput.forEach((item) -> updateDict(item, dict));
+    System.out.println("output count = " + actualOutput.size());
+    System.out.println();
+    System.out.println("dict count = " + dict.size());
 
-    assertThat(actualOutput).containsExactlyElementsOf(expectedOutput);
+    return dict;
+
+  }
+
+  public <T1, T2> void updateDict(KeyValue<T1, T2> kv, Map<T1, T2> dict) {
+    if (dict.containsKey(kv.key))
+      dict.replace(kv.key, kv.value);
+    else
+      dict.put(kv.key, kv.value);
   }
 
   public <T extends Object> T nullCoalesce(T first, T second) {
@@ -128,7 +142,7 @@ public class MergeTest {
     IntegrationTestUtils.produceValuesSynchronously(inputTopic, input, producerConfig);
   }
 
-  public List<KeyValue<String, Person>> getOutputData(List<KeyValue<String, Person>> expectedOutput) {
+  public List<KeyValue<String, Person>> getOutputData(int size) {
     Properties consumerConfig = new Properties();
     consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, "wordcount-lambda-integration-test-standard-consumer");
@@ -137,8 +151,7 @@ public class MergeTest {
     consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PersonSerializer.class);
 
     try {
-      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic,
-          expectedOutput.size());
+      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 5000L);
     } catch (InterruptedException e) {
       System.out.println(e);
       return null;
