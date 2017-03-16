@@ -154,11 +154,13 @@ public class MergeTest {
     
     streams.close();
 
-    System.out.print("\n\n expected -- " + expectedMergedUsers.containsAll(actualOutput));
-
+    System.out.print("\n\n output -- ");
+    actualOutput.foreach((item) -> System.out.print("\n" + item));
   }
 
   public <T extends Object> T nullCoalesce(T first, T second) {
+
+    System.out.print("\ncomparting " + first + " to " + second + " returns " + first != null ? first : second);
     return first != null ? first : second;
   }
 
