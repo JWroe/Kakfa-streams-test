@@ -21,12 +21,7 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
     @Override
     public byte[] serialize(String s, Person user) {
         String line = String.format(Locale.ROOT, "%s,%s,%s", user.Address, user.Age, user.NhsNumber);
-        byte[] asBytes =  line.getBytes(CHARSET);
-
-        if(asBytes == null){
-            System.out.print("2634!!!! \n\n\n\n\n null serialization\n\n\n\n\n");
-        }
-        return asBytes;
+        return line.getBytes(CHARSET);
     }
 
     @Override
