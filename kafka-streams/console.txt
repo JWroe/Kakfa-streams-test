@@ -41,7 +41,11 @@
 [WARNING]  org.apache.kafka:kafka_2.11:0.10.2.0-cp1 requires scala version: 2.11.8
 [WARNING]  org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 requires scala version: 2.11.6
 [WARNING] Multiple versions of scala libraries detected!
-[INFO] Nothing to compile - all classes are up to date
+[INFO] /home/jamie/Git/KafkaExamples/kafka-streams/src/test/java:-1: info: compiling
+[INFO] /home/jamie/Git/KafkaExamples/kafka-streams/target/generated-test-sources/test-annotations:-1: info: compiling
+[INFO] Compiling 32 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes at 1489674757196
+[INFO] prepare-compile in 0 s
+[INFO] compile in 0 s
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ streams-examples ---
 
@@ -49,67 +53,337 @@
  T E S T S
 -------------------------------------------------------
 Running io.confluent.examples.streams.MergeTest
-[2017-03-16 13:51:47,935] WARN [main] No meta.properties file under dir /tmp/junit4376195842331863217/junit1197345412779186376/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-16 13:51:48,152] WARN [main] No meta.properties file under dir /tmp/junit4376195842331863217/junit1197345412779186376/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-16 13:51:48,358] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-16 13:51:48,362] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-16 13:51:48,380] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
-[2017-03-16 13:51:48,797] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-16 14:32:40,052] WARN [main] No meta.properties file under dir /tmp/junit6762087287045754889/junit6309325028182043161/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-16 14:32:40,261] WARN [main] No meta.properties file under dir /tmp/junit6762087287045754889/junit6309325028182043161/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-16 14:32:40,444] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-16 14:32:40,447] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-16 14:32:40,469] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
+[2017-03-16 14:32:40,862] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
 expected -- 
-USER: 11,60,e8320677-5a8a-4228-8ad9-780fd34c63ba
-USER: 12,30,2106a147-2e35-410b-bdd4-736c799e460c
-USER: 13,67,fe6df149-dfd5-4c92-8b20-d987ddae8469
-USER: 14,97,65f83e6f-c29e-4c69-a0dc-d64201c60d5e
-USER: 0,21,507c3209-9c2d-47c2-871e-2de5237ac9c1
-USER: 1,96,8478805c-dc3b-4224-9581-210a82d908fb
-USER: 2,null,97c9cd51-bd43-4511-9cc7-b0401d52f4b0
-USER: 3,91,0b6c0178-b3fb-4d18-9eda-975870a206a4
-USER: 4,54,070fa212-5131-4ccd-9dc0-57e3c024975c
-USER: 5,33,a3b854f4-718c-41f5-953f-cb9ca3e4446c
-USER: 6,21,0abc861d-b5e4-47fc-bd80-4dfeff2377e8
-USER: 7,81,53c3e94c-3453-436f-a6cc-7b47f881d141
-USER: 8,16,bef58de2-be5a-405b-94c8-1faca2db7170
-USER: 9,53,072a1db9-eb71-426d-bdb1-8435ffcac47f
-USER: 10,46,d444ee77-4a69-40b0-8e04-c6fade52d06d
+USER: 88,22,6345cce6-b0f4-4810-9ac4-5b99fb9c1960
+USER: 89,27,6548cad6-a7cc-4dcd-bca2-b6c858f3a62b
+USER: 110,34,8bd87676-c549-477f-b9cb-bc96a6dd162d
+USER: 111,42,bb92f314-8bbb-4b6d-9c14-fa68738c8d80
+USER: 112,78,3a29ec8f-8634-4a67-b71c-3afc8b300d2b
+USER: 113,65,4de04b2a-f624-4ac0-93ee-c95acacb299f
+USER: 114,64,c9aec4a6-5dc4-46d5-82f1-7547c2fde91b
+USER: 115,94,db0fdf4e-5461-4057-9729-1bb7ba31a996
+USER: 116,34,84038d3c-d052-44f7-8434-dbaab1796847
+USER: 117,60,b99f71ed-377f-4990-aaf4-bf7ee778f005
+USER: 90,43,edf23a71-6da6-4cdc-9bf1-c7402f40fb32
+USER: 118,17,e94ecde6-84a8-4863-b730-286906256394
+USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead
+USER: 92,31,44c5a6b8-b2de-41dc-b13e-f00d437d346b
+USER: 119,28,415de640-0850-406c-9153-fcbd8a07e60f
+USER: 93,37,fcaf65c2-fdcc-429f-8c4d-43750b2ba56b
+USER: 94,77,51cbdc3c-6ee2-45a3-a76e-187369e6915d
+USER: 95,34,d4816bf1-303d-4735-a5cd-fd654a9bd748
+USER: 96,29,a83586c3-de79-4aa1-8fb9-626c1c5e4ca8
+USER: 97,86,e6e3978a-159c-4fab-98e3-d01dcd4fe32c
+USER: 10,25,a7656d5d-bed1-4ef7-aea3-1f890e5602b5
+USER: 98,52,29f1a764-0b20-4a01-83ee-06d9daad9476
+USER: 99,65,9b8afc03-e375-4ea4-8464-cb1fbed2e25a
+USER: 11,60,5357576f-0e70-49b3-be1a-c101c11a08a7
+USER: 12,15,31d5c0c7-fce2-4762-a56b-ef15137c1183
+USER: 13,13,35e05875-c57e-429d-9c9b-ca216197db0a
+USER: 14,36,0413f03f-4b74-441a-bf03-142dca929bd9
+USER: 15,81,26b77c17-9a51-48ae-8818-412096387b3e
+USER: 16,57,4a9f418c-ee0b-422b-ad44-0e84923701f9
+USER: 17,10,2165790c-3e66-4625-be10-7ae25d8f1d84
+USER: 18,20,338d4675-eae9-4afb-8272-d562e4df19a2
+USER: 19,18,6373e9ef-59de-42e3-8402-8f3c3500c46f
+USER: 120,80,49845b0b-2d09-4244-af35-56ac29033ce2
+USER: 121,44,9281af68-f7b9-4124-baa7-6b3c23e25c0f
+USER: 0,65,70d6d6c2-5e17-4d30-9cd0-428a4ed31b7d
+USER: 1,77,004ca446-41ba-4e7c-b190-95642bf6f168
+USER: 122,43,3c1f7a28-a375-4477-afc9-bcbf01fa04a2
+USER: 2,12,00b29233-dbd4-4a57-82bc-12eb8f136b62
+USER: 123,97,ffc709fc-e8d5-447e-b1bf-3c8161b50bfa
+USER: 124,17,92539cc4-cdb1-4873-9c9e-35256dd8ce54
+USER: 3,91,2b7fc10d-1efd-46ee-a2ba-f916d8931b56
+USER: 125,96,29ff87dd-3a30-4412-a618-3111aa91bcd1
+USER: 4,28,470896ba-9fdf-4182-a7a9-17f20878c55f
+USER: 5,63,c90248c3-0284-40cb-9159-422d80393b81
+USER: 126,12,cef3f880-39a0-41f3-a5b4-4c3db9060fd3
+USER: 127,48,e06b99c3-a228-4a4d-9560-f1b0291403e1
+USER: 6,25,6aeb77f2-28b9-494f-b133-381b1a8739b0
+USER: 128,97,bdfc68a8-887b-4dff-acf5-c334301a41df
+USER: 7,87,95160d65-186f-4ac5-aa11-67b8834e2798
+USER: 8,19,bc65d13c-a88d-472b-b2fe-e286948d8ede
+USER: 129,67,ca9b5e0e-edf2-4611-a4d1-6f2e49c52fa2
+USER: 9,65,60731529-0d0b-461f-8f71-ea5f5dec70c7
+USER: 20,98,e4715fea-291d-41d6-9c9d-15a6a26a2f9b
+USER: 21,20,53c9be05-06fc-4a51-b0f6-1f216f3a7662
+USER: 22,19,188ac5af-8b18-4bd3-9aea-931afe90ee7a
+USER: 23,76,09be7751-a19f-4f6b-acce-e7f19013f7cb
+USER: 24,46,d636c247-95e2-4eb3-8587-3d06870ed011
+USER: 25,67,d498f765-ce2d-450a-9c07-09f953e5493f
+USER: 26,67,f1577cc5-adfc-49ff-a619-850fdb0355ae
+USER: 27,43,eb7b6647-f979-4d3c-9b05-286bddeefe3c
+USER: 28,27,db172e0d-09e7-4022-b820-1021f094b0ff
+USER: 29,48,21d269c7-924f-4d0f-82e3-a82fa5337bc0
+USER: 130,25,75449770-b0ff-4f52-8f62-73ac291e41c3
+USER: 131,73,896edfef-f959-4bfd-93f8-024ba8cdcac1
+USER: 132,17,2f93112e-b884-4d34-9140-ca2fef335706
+USER: 133,74,fab417c7-1d8d-4907-b958-b8eb784d78a8
+USER: 134,65,f333ddd1-893f-483d-985a-f1f4d973970a
+USER: 135,36,6a6fe72c-118b-444b-8d3c-2553a5024386
+USER: 136,57,83e40fd9-a2b7-4f21-83c9-99fec5b39cd0
+USER: 137,82,293fd7a5-1bb5-48a3-a36d-4c96f2d35f07
+USER: 138,60,0bd33144-3baa-4100-9f63-255ea05f994e
+USER: 139,43,eda3f844-b25f-4665-8998-0e0fabdc85d6
+USER: 30,18,5fc809c8-65c5-4a5c-84a4-6f9c61e49e37
+USER: 31,74,97209b10-92ab-4d56-9fe2-a210b9b0287a
+USER: 32,23,140ddc5a-6e2b-4f58-9a4a-d241cb2bb22f
+USER: 33,85,5c584179-a69d-4066-af81-47d135e0af12
+USER: 34,26,c1f83f49-9a24-4e15-b718-5b7fb2d42f88
+USER: 35,13,d5228f0b-8f3d-4a14-a746-8e488a9aeef4
+USER: 36,16,6b8faa1d-f628-4cf5-896a-7e2b5f197932
+USER: 37,54,ceb123d4-b7a8-4b44-b61f-451994e92847
+USER: 38,83,f71cac2d-f09e-4432-bc30-f804633d3739
+USER: 39,39,92b1ee16-3827-4340-a4c6-b8fad159fbeb
+USER: 140,40,a63e087b-760f-46c9-bf14-9d9ec52eaa3d
+USER: 141,13,40ef8ba3-198b-419c-a894-3fb51ee747ee
+USER: 142,11,5092e39a-3e03-4868-8444-0dcc1e275a28
+USER: 143,23,ff006bc0-707a-4489-b422-c77bc36b12fa
+USER: 144,86,855a62c0-9f25-4db5-a1b1-30c2afc36a55
+USER: 145,14,10078d51-7e64-48d0-a564-d77b0a5c1f82
+USER: 146,47,178ff53f-5a95-4a35-af58-4a1fbc6cd2f9
+USER: 147,80,0fb6dc99-729b-4083-b886-8c40e903bb55
+USER: 148,93,a9d96fb6-6d06-485b-aa17-1cd575808d1c
+USER: 149,75,bf7ce5d2-cb16-4540-b5e8-4dad26f78798
+USER: 40,29,eac098dd-a409-4ea1-a60e-b42a9658d7e6
+USER: 41,59,8a2bd2ad-9dc3-4996-91d3-4975daea133d
+USER: 42,48,2c21c729-c162-413c-96e6-e7ee660a2d7f
+USER: 43,24,5fe5e93b-c283-47c1-b6c7-4a03f95380dc
+USER: 44,50,32aa5670-a654-46ee-875c-7ca9afeee1fa
+USER: 45,14,a1d0801f-c07b-40df-a6ee-764d498b946e
+USER: 46,24,8a082be3-ebe3-41f9-9325-201ea694c6fc
+USER: 47,26,1a59c354-7e53-44d3-8031-285dc3fdebb1
+USER: 48,90,caabffc1-454b-4189-919f-e3d35b5ee6b3
+USER: 49,52,0a3118f3-aa8d-435e-844d-779f68d9d4af
+USER: 50,55,c5df2627-f89b-41cb-ac0d-3e95e0689409
+USER: 51,74,5b982969-dd8d-47a5-a10f-736527c3f341
+USER: 52,51,dfe6774e-1e12-4805-a21b-40d1b3e9f97f
+USER: 53,62,bb54eec4-3a90-47b3-b0fd-60ff6c2265b8
+USER: 54,82,7ea7068a-5a7c-40d5-8793-27133b39cf71
+USER: 55,44,b6adb379-9ff6-4c56-a9f8-95248a347549
+USER: 56,61,2107f321-9f0e-496d-9071-1672089b1040
+USER: 57,13,d475956e-5e6b-4060-a84d-7952205609c7
+USER: 58,69,b4188b41-0a03-4dcd-b7c1-8382b0436264
+USER: 59,67,aed48c1c-1c3d-4a9e-aacd-ee845e28dddf
+USER: 60,86,6d816308-b222-455d-878f-52ae3c881dd9
+USER: 61,30,6e4f2b98-05d2-4551-a741-49d870f2cfd2
+USER: 62,34,29e94325-7d2d-4880-aa7a-93a16695adee
+USER: 63,40,95551409-b590-4b20-8536-548048d5bb20
+USER: 64,37,dd795a35-5e8c-402b-a780-9a5c03fc5627
+USER: 65,91,ba3265ba-e21a-4ab5-af8f-bf9bb4e0244e
+USER: 66,36,cc005c37-fb4e-468d-8b74-4a77f425130d
+USER: 67,93,8b8fe613-f7de-4141-a3e7-aa00cc4c58dc
+USER: 68,59,5bee2cbb-c46a-450d-a87c-4e500a02bb27
+USER: 69,41,9e3f086e-80aa-428f-9a1c-e988f77455da
+USER: 70,49,04a1ed0e-def6-411d-8c1b-24d0a0dfabad
+USER: 71,30,8fc563f5-dafb-45ec-85d0-3e22d7d2e895
+USER: 72,22,2b52b176-743e-4003-86b5-f4d5677a80c2
+USER: 73,22,01b4bad1-0ae8-4b4d-8ccf-e5272bd348b4
+USER: 74,31,12fcc524-7252-4992-b112-ab4e94e806aa
+USER: 75,45,78d6848c-cb8f-46af-a4c5-0766e87dec12
+USER: 76,15,60677dba-2ae3-4487-9148-c861a8f057ba
+USER: 77,78,e1cb77a2-b6b7-4efa-a480-9f940f8358cd
+USER: 78,86,6cca259b-fb7c-4679-a1bf-aa769439c9bc
+USER: 79,43,e9f5e413-5422-4d78-bfdd-a45fe6f1c4f1
+USER: 100,50,f96c2a88-dee4-406c-beff-841dd7086e0d
+USER: 101,87,7a2fb29e-8e7f-4063-8376-9bc4ef14df66
+USER: 102,16,314e9612-19ec-498e-aeef-f3dc67d2aa73
+USER: 103,89,0e0fd3a9-ed57-4835-aa1d-1b7c7c5b6f29
+USER: 104,29,b03af1c5-3c20-4d67-8ca3-a655a27f5474
+USER: 105,39,2ca91ebb-677a-464e-bdb0-9900768f246c
+USER: 106,86,5e0a64a9-c613-4edc-92fa-96eea59d68a9
+USER: 107,14,57578969-efee-4b33-a247-6696b2d825fb
+USER: 80,90,c88fc63f-aead-40fc-8a9b-02e54fee8e11
+USER: 108,23,c0c37138-c09a-48ae-a1b0-43a88cb5cf55
+USER: 81,79,57e8eae9-4bcd-42ab-848e-48429002bfce
+USER: 109,15,8007bfe2-59de-4718-891e-583a22865d2c
+USER: 82,76,26cc96bb-e0c9-4146-9766-f28405f59e9c
+USER: 83,76,ff5f10df-da74-498f-ac2e-ba3faf68ae7d
+USER: 84,86,c010f83c-e153-4bae-93a1-24c5bbfff589
+USER: 85,34,32dcd501-8b99-4bbd-9407-461c1c5b9358
+USER: 86,72,35b75858-ac3f-4c24-a1f8-d76355af8b94
+USER: 87,63,9adbcea8-17bf-48b0-816b-0a324569b343
 
-output count = 15
+output count = 752
 
-dict count = 15
+dict count = 150
 Actual:
-USER: 11,60,e8320677-5a8a-4228-8ad9-780fd34c63ba
-USER: 12,30,2106a147-2e35-410b-bdd4-736c799e460c
-USER: 13,67,fe6df149-dfd5-4c92-8b20-d987ddae8469
-USER: 14,97,65f83e6f-c29e-4c69-a0dc-d64201c60d5e
-USER: 0,21,507c3209-9c2d-47c2-871e-2de5237ac9c1
-USER: 1,96,8478805c-dc3b-4224-9581-210a82d908fb
-USER: 2,null,97c9cd51-bd43-4511-9cc7-b0401d52f4b0
-USER: 3,91,0b6c0178-b3fb-4d18-9eda-975870a206a4
-USER: 4,54,070fa212-5131-4ccd-9dc0-57e3c024975c
-USER: 5,33,a3b854f4-718c-41f5-953f-cb9ca3e4446c
-USER: 6,21,0abc861d-b5e4-47fc-bd80-4dfeff2377e8
-USER: 7,81,53c3e94c-3453-436f-a6cc-7b47f881d141
-USER: 8,16,bef58de2-be5a-405b-94c8-1faca2db7170
-USER: 9,53,072a1db9-eb71-426d-bdb1-8435ffcac47f
-USER: 10,46,d444ee77-4a69-40b0-8e04-c6fade52d06d
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.278 sec <<< FAILURE! - in io.confluent.examples.streams.MergeTest
-shouldMergeOnNhsNumber(io.confluent.examples.streams.MergeTest)  Time elapsed: 7.216 sec  <<< ERROR!
+USER: 88,73,ad471b12-c171-4a82-bfee-044eaad7c2f5
+USER: 89,29,b104901e-9d9e-4697-9c80-3e5f1cdb426f
+USER: 110,65,e7a3431e-37d2-469d-89d5-94e2246ff54f
+USER: 111,68,7088b0f3-3cd3-441d-8f80-bdb9c45057c5
+USER: 112,16,a4cbb603-21c8-4278-a5b6-33d4b6018340
+USER: 113,63,11ed1356-d0d6-4c1f-b938-0c42e2af0ed5
+USER: 114,null,0b382be2-89b2-4773-9cad-6e5b0f635266
+USER: 115,53,1fb7ce34-a631-4838-8306-d2e573a7fea1
+USER: 116,53,d99e7c13-306f-413e-963d-847718ccbd36
+USER: 117,65,aeddce35-4d94-49d2-a6bb-eeada2ee44d8
+USER: 90,57,f99ab51c-9691-428f-abec-c8896c2ece06
+USER: 118,48,38be9c3e-3ac6-4ea7-ab89-149b2671da01
+USER: 91,15,b141efcb-86a5-4412-91e3-3007fdbc2864
+USER: 92,null,
+USER: 119,16,ce89ecb1-8c62-4fb5-bf0b-95e0bc799177
+USER: 93,null,dd6acb14-1f60-4386-b964-594e383981af
+USER: 94,79,71e124a1-3829-41a6-80c5-a9c66afb2655
+USER: 95,99,b5a9b528-7917-4550-855c-9312cec91271
+USER: 96,58,cbb6d323-f424-4037-bfcb-d36cce200e65
+USER: 97,57,b9956f55-7082-413b-a3b2-e0b73f5244f1
+USER: 98,40,986a12a4-ba8a-435a-b96e-ad33995959d2
+USER: 10,90,
+USER: 99,43,b30d6248-1e0b-4fe2-b8f0-74d2e34e26d2
+USER: 11,11,e86eb8a0-dd3a-442f-b244-faa07f92ce2a
+USER: 12,32,202fd58e-ddfb-4c11-9667-9d166e0caa1a
+USER: 13,60,2dc189a3-6c1d-4cdb-bbce-7f067cad94b9
+USER: 14,12,17850eff-1750-4b08-8dbb-450b82026a5e
+USER: 15,null,999274de-7cd5-44b8-badc-abcaae7b85ee
+USER: 16,36,2ef8fb71-a8c0-42ca-babc-ed42e41c4277
+USER: 17,79,163ad29b-6eef-4e8d-ba83-15a5d47c2989
+USER: 18,53,15e98425-6869-4461-8d6b-8db68b5388e6
+USER: 19,26,690a3585-8d45-4bf8-ad29-d0e4eb1adffd
+USER: 120,null,
+USER: 0,28,30293dcd-773f-4fcf-9576-be9988476ed1
+USER: 121,92,cb433278-38f2-4f19-94c2-f430af6930e0
+USER: 1,17,4a255161-0b76-42a1-93a7-2e3525feade4
+USER: 122,23,80202f6a-af62-4297-aeb0-a57db5b92e13
+USER: 123,68,d22188dc-5055-482d-82f2-eddb21af95ac
+USER: 2,99,328aff3b-d438-4a4d-bbc2-6d18552820af
+USER: 124,51,9c15a20a-67f4-4e43-a71a-72001ac815b2
+USER: 3,65,e2dd4e52-8e58-48d8-ab07-9e4ba4090a15
+USER: 4,29,cbb653b3-be8b-4d06-8111-5cb1d543d434
+USER: 125,42,a43aaaba-2b47-49d8-a2f1-127afe613786
+USER: 5,91,61a113e6-e661-4488-af11-b242ddcff2f8
+USER: 126,31,82bcae69-2024-4a0b-9882-b2c6da1f1af1
+USER: 127,96,d9abe81c-0b02-4d38-8f82-7bd8bfe8f503
+USER: 6,66,38e226bc-bc0f-4641-9ff6-018ec1c2ce17
+USER: 7,28,39e73269-6fe2-4d34-9a99-df58b887a5b8
+USER: 128,17,aab19f8c-6745-439b-b6c5-280778da84ec
+USER: 8,24,aa60af6e-527f-4c72-a266-5774681d0c91
+USER: 129,45,454d7398-5448-4edf-933c-4215230fd4da
+USER: 9,47,40b125c9-b5b1-4af2-80a3-cee26508209f
+USER: 20,87,69067cbe-4c9a-4cd0-8a96-38cac55cced7
+USER: 21,50,
+USER: 22,92,82c53ee6-960c-449b-aca7-288d4df067aa
+USER: 23,49,4e2aefd8-91a8-4a16-bb80-6f64f74a83a5
+USER: 24,19,5a195116-8001-455b-ba67-560547f43828
+USER: 25,12,ff664ef1-1aa7-4e76-91cd-ccf6f92434f5
+USER: 26,83,2ef86a6f-256f-4511-8aa7-afa867c78ce7
+USER: 27,70,
+USER: 28,90,0656e169-aa62-43ff-8e0a-12b51adb8029
+USER: 29,66,f4507468-d261-485c-a1f8-0f53b8a0cf47
+USER: 130,69,165978ac-05ca-4d5f-8a6c-88e322aa30c0
+USER: 131,35,39774c0e-23b5-4f53-afc8-e433fba488f8
+USER: 132,94,
+USER: 133,77,f4d75175-4693-4d84-9b3b-ec82dc04c8f2
+USER: 134,null,8f1cba88-76fd-4c3f-9208-2af0f772235f
+USER: 135,29,20464d43-b809-4b41-afc7-38d12feda25e
+USER: 136,80,62906d1f-91f3-4731-9e68-e8b866107c80
+USER: 137,46,7fd5992c-be37-4f33-934c-657508e3964e
+USER: 138,18,e1077766-9655-4dee-98b6-59280cc14f85
+USER: 139,85,1b175fa6-9263-417c-ad9c-f946105dad19
+USER: 30,10,3bf0a25c-5179-44ef-9d34-e6f5136a633f
+USER: 31,12,77e03def-c8a1-46ca-ae1c-748b70485a62
+USER: 32,45,
+USER: 33,79,fadc075e-a1e5-4a21-8629-3d7e7fc530f8
+USER: 34,46,74654660-5388-447e-82e7-b3e7ad3db809
+USER: 35,65,2602da13-99a0-4ad8-b4bb-e4206d9a2b90
+USER: 36,25,39cec041-98b5-40ee-a664-cc523a9e299b
+USER: 37,48,c01ee411-9f37-44f3-a5ce-3569d97174f4
+USER: 38,43,d29f230f-5ee0-4472-8859-cc3f7c091bb1
+USER: 39,10,3fba875e-d373-41dc-8bd7-40f1720577ec
+USER: 140,79,eb3f101f-8752-4530-9592-9d2525716217
+USER: 141,26,5229b3e2-0491-4c1c-a31e-557965d83fa6
+USER: 142,21,1e3cf682-7ffc-4aff-8a64-9e279452143e
+USER: 143,47,26a04147-a9cd-4a2d-9a4b-4c2b94f2559f
+USER: 144,58,f1d0cd34-c056-4014-a168-768fe6fc9c07
+USER: 145,13,
+USER: 146,21,0a2564eb-e04f-4457-888e-5e64e3872999
+USER: 147,56,d12aa6c5-d5b1-4544-a369-0e5fc0585525
+USER: 148,81,cfc06f6b-8e45-4b14-b289-2562c532e178
+USER: 149,null,6e915093-1055-4974-9b18-e2b148b4f216
+USER: 40,49,28622383-14bd-4d61-ae35-0b02b15630b7
+USER: 41,57,3ed8eb7e-c838-46f7-8d44-edc4b2caa4a2
+USER: 42,24,b4ae6888-741c-48c3-8af1-d45fb42bc082
+USER: 43,49,ffa7c272-4add-4dad-8e98-2be6e9e2c8ec
+USER: 44,24,07fd07a5-a041-419e-adcf-c99a9187b649
+USER: 45,49,bf7647bf-b15e-42c8-bd2c-21101a3258e2
+USER: 46,55,cbcead7f-090a-40fa-aeb0-7714e1e67b37
+USER: 47,85,12e681d9-812c-465d-b5d2-37a81ca623b0
+USER: 48,65,58204130-1a51-43fb-b892-5c541e1e6fd7
+USER: 49,53,ab0d0081-2ced-4dc0-bc2f-7bd792e6d1b3
+USER: 50,84,543a1aba-f94f-4a86-a615-14052a8511ab
+USER: 51,76,a5630ab6-dbc9-4df5-80d4-ab7058f61337
+USER: 52,75,28af2e52-3e3d-4623-9e11-72b909dda048
+USER: 53,null,1ed58548-1ab0-4819-b5a4-61f17fab2e76
+USER: 54,56,8aa593ac-24f3-473f-8eca-542f6047d931
+USER: 55,18,9fb3f9d4-b8a4-44d9-83db-c8a74e31ca75
+USER: 56,63,18cf0676-47f1-4765-ade0-8f902d8ad607
+USER: 57,74,2f86f0c7-05ce-45eb-8575-4012e15c9367
+USER: 58,93,74d98106-83c3-4dec-917a-64786c929b9b
+USER: 59,28,5727f189-cb58-4a65-ac12-21bf3c6d5f3e
+USER: 60,59,a2e4aa1a-360d-43ce-a1c9-8b4bd959022d
+USER: 61,42,1aac7e4b-48bb-4214-9114-eca3e20e6c55
+USER: 62,99,
+USER: 63,59,5f043cdb-cf78-4751-a1ca-5696e23259c5
+USER: 64,36,d8cb6263-2096-466a-aa33-8502687c0ce6
+USER: 65,92,75af7318-0e0b-489f-810e-be37b5f6489f
+USER: 66,45,516f720f-5cbc-4a28-aa59-75a0d7fc3316
+USER: 67,85,c8d7fbe6-098e-46f7-9fb4-54f9ed156977
+USER: 68,76,2b02503b-5ca2-42d1-b8cc-1c3891dd7172
+USER: 69,48,427b263c-b4d0-485c-b81c-6e54fb7d19c6
+USER: 70,86,a11b4ea4-b158-464c-a193-f76f8bddb267
+USER: 71,72,38435a14-ffde-4f04-98f5-18a93d5a5a81
+USER: 72,81,f42bfb6e-8019-4226-bba1-7f8585a8e474
+USER: 73,51,2f23625a-b5d8-4910-abfa-578597f7e82c
+USER: 74,77,89c27522-7a49-482a-b8e0-41950feaf7de
+USER: 75,69,dd108c53-d124-46ea-9010-05a028ede70c
+USER: 76,71,682fe31a-88b9-4b34-a654-ee2a89b6c749
+USER: 77,null,588a9edd-577b-46a8-83d1-fad6fea57bdb
+USER: 78,75,cfbe18aa-dfd1-4114-b636-63e5ca300d73
+USER: 79,96,d0d21c65-523f-4784-a142-48c764dcf266
+USER: 100,65,78c55fc8-1b45-4f5c-985c-57d84934c15c
+USER: 101,46,3f628ad9-4629-4797-bc50-79169c10e265
+USER: 102,null,cbb7c17b-4f8c-4af5-a2f8-08adea97bb60
+USER: 103,15,3d25edfa-db7a-424a-ae2a-7d0eb14b09fb
+USER: 104,65,bd4a5b68-e041-4d49-b5b3-55afd9b52879
+USER: 105,35,b23da4f1-7797-49dd-acd4-de5bf0de1de9
+USER: 106,94,42e0d99c-e3a6-4ccb-ad92-29a0a5f6f909
+USER: 80,null,20582c44-0bd4-4868-8017-0bca36f97819
+USER: 107,83,b387c17d-7f10-4190-b3e6-006224c83eaf
+USER: 81,96,3d546593-d8c3-469c-bb1f-0fd2c18f4dda
+USER: 108,77,c1c585d1-3e37-4910-9896-dff17c375787
+USER: 109,80,d8da46f6-0277-4f42-9b6d-2c2547554aac
+USER: 82,24,a9c7f7f7-99ad-4207-a13b-1fc5bb2f873b
+USER: 83,94,e5dd94bf-7e9e-4cff-ac85-9585292b61f1
+USER: 84,null,d6eeec83-7798-402f-8498-1658797f8447
+USER: 85,18,b9fcc197-f7a5-49b0-bebe-3c49624ae844
+USER: 86,81,292fb79f-949f-4864-b502-1f0daf2ecbea
+USER: 87,31,de4f9c72-e239-4a7c-9dfe-b8578ee3a138
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 22.099 sec <<< FAILURE! - in io.confluent.examples.streams.MergeTest
+shouldMergeOnNhsNumber(io.confluent.examples.streams.MergeTest)  Time elapsed: 17.775 sec  <<< ERROR!
 java.lang.NullPointerException
-	at io.confluent.examples.streams.MergeTest.shouldMergeOnNhsNumber(MergeTest.java:102)
+	at io.confluent.examples.streams.MergeTest.shouldMergeOnNhsNumber(MergeTest.java:101)
 
 
 Results :
 
 Tests in error: 
-  MergeTest.shouldMergeOnNhsNumber:102 » NullPointer
+  MergeTest.shouldMergeOnNhsNumber:101 » NullPointer
 
 Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 15.949 s
-[INFO] Finished at: 2017-03-16T13:51:57+00:00
-[INFO] Final Memory: 38M/607M
+[INFO] Total time: 27.487 s
+[INFO] Finished at: 2017-03-16T14:33:00+00:00
+[INFO] Final Memory: 38M/597M
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project streams-examples: There are test failures.
 [ERROR] 

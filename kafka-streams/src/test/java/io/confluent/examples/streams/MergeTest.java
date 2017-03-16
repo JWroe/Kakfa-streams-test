@@ -40,8 +40,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpUe8XsV.tmp";
-    final String expectedFile = "/tmp/tmpcukva0.tmp";
+    final String inputFile = "/tmp/tmpaVzM8e.tmp";
+    final String expectedFile = "/tmp/tmpVRmbpa.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, new PersonSerde().getClass().getName());
-    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 100);
+    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 1);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
@@ -76,8 +76,7 @@ public class MergeTest {
 
     KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
         .groupBy((key, value) -> value.NhsNumber)
-       .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
-            nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
+        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber, nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
     //users.foreach((key, value) -> System.out.println("\n\ninput - value = " + value));
     // KStream<String,String> sumat = users.grou
