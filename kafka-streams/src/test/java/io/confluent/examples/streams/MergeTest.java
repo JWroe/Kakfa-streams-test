@@ -52,6 +52,7 @@ public class MergeTest {
 
     Map<String, Person> expectedOutput = new HashMap<>();
     try (Stream<String> stream = Files.lines(Paths.get(expectedFile))) {
+      
       stream.forEach((line) -> updateDict(new KeyValue<String, Person>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line)), expectedOutput));
     }
 
@@ -68,7 +69,7 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, new PersonSerde().getClass().getName());
-    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 1);
+    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10000);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
@@ -89,7 +90,7 @@ public class MergeTest {
 
     produceInputData(inputValues);
 
-    Thread.sleep(5000);
+    Thread.sleep(15000);
 
     List<KeyValue<String, Person>> actualOutput = getOutputData(0);
 
@@ -101,7 +102,6 @@ public class MergeTest {
     assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
 
     streams.close();
-    
   }
 
   public <T1, T2> Map<T1, T2> getJustLatestValues(List<KeyValue<T1, T2>> actualOutput) {
@@ -112,7 +112,6 @@ public class MergeTest {
     System.out.println("dict count = " + dict.size());
 
     return dict;
-
   }
 
   public <T1, T2> void updateDict(KeyValue<T1, T2> kv, Map<T1, T2> dict) {
