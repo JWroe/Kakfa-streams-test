@@ -26,20 +26,20 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
 
     @Override
     public Person deserialize(String topic, byte[] bytes) {
-        if(bytes == null){
+        if (bytes == null) {
             return null;
         }
-            String[] parts = new String(bytes, CHARSET).split(",");
-            return new Person(parts[0], tryParseInt(parts[1]), parts[2]);        
+        String[] parts = new String(bytes, CHARSET).split(",", -1);
+        return new Person(parts[0], tryParseInt(parts[1]), parts[2]);
     }
 
-    Integer tryParseInt(String value) {  
-     try {  
-         return Integer.parseInt(value);  
-      } catch (NumberFormatException e) {  
-         return null;  
-      }  
-}
+    Integer tryParseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 
     @Override
     public void close() {
