@@ -48,8 +48,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpqC7QaE.tmp";
-    final String expectedFile = "/tmp/tmpqC7QaE.tmp";
+    final String inputFile = "/tmp/tmpeKVujn.tmp";
+    final String expectedFile = "/tmp/tmphelKBG.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -59,9 +59,13 @@ public class MergeTest {
     }
 
     List<KeyValue<String, Person>> expectedOutput = new ArrayList<>();
-    try (Stream<String> stream = Files.lines(Paths.get(inputFile))) {
+    try (Stream<String> stream = Files.lines(Paths.get(expectedFile))) {
       stream.forEach((line) -> expectedOutput.add(new KeyValue<>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line))));
     }
+
+    //System.out.println("expected -- ");
+    //expectedOutput.forEach((item) -> System.out.println(item));
+    //System.out.println();
 
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
@@ -79,7 +83,8 @@ public class MergeTest {
     KStreamBuilder builder = new KStreamBuilder();
 
     KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
-        .groupBy((key, value) -> value.NhsNumber).reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
+        .groupBy((key, value) -> value.NhsNumber)
+        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
             nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
     //users.foreach((key, value) -> System.out.println("\n\ninput - value = " + value));
@@ -97,13 +102,9 @@ public class MergeTest {
 
     streams.close();
 
-    System.out.println("output -- ");
-    actualOutput.forEach((item) -> System.out.println(item));
-    System.out.println();
-
-    System.out.println("expected -- ");
-    expectedOutput.forEach((item) -> System.out.println(item));
-    System.out.println();
+    //System.out.println("output -- ");
+    //actualOutput.forEach((item) -> System.out.println(item));
+    //System.out.println();
 
     assertThat(actualOutput).containsExactlyElementsOf(expectedOutput);
   }
