@@ -20,7 +20,7 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
 
     @Override
     public byte[] serialize(String s, Person user) {
-        String line = String.format(Locale.ROOT, "%s,%s,%s", user.Address, user.Age, user.NhsNumber);
+        String line = String.format(Locale.ROOT, "%s,%s,%s", user.NhsNumber, user.Age, user.Address);
         return line.getBytes(CHARSET);
     }
 
@@ -30,7 +30,7 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
             return null;
         }
             String[] parts = new String(bytes, CHARSET).split(",");
-            return new Person(parts[2], tryParseInt(parts[1]), parts[0]);        
+            return new Person(parts[0], tryParseInt(parts[1]), parts[2]);        
     }
 
     Integer tryParseInt(String value) {  
