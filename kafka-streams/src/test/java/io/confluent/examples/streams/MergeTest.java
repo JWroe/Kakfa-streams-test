@@ -27,6 +27,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KGroupedStream;
 
 import org.apache.kafka.test.TestUtils;
@@ -57,25 +58,6 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * End-to-end integration test that demonstrates how aggregations on a KTable produce the expected
- * results even though new data is continuously arriving in the KTable's input topic in Kafka.
- *
- * The use case we implement is to continuously compute user counts per region based on location
- * updates that are sent to a Kafka topic.  What we want to achieve is to always have the
- * latest and correct user counts per region even as users keep moving between regions while our
- * stream processing application is running (imagine, for example, that we are tracking passengers
- * on air planes).  More concretely,  whenever a new messages arrives in the Kafka input topic that
- * indicates a user moved to a new region, we want the effect of 1) reducing the user's previous
- * region by 1 count and 2) increasing the user's new region by 1 count.
- *
- * You could use the code below, for example, to create a real-time heat map of the world where
- * colors denote the current number of users in each area of the world.
- *
- * This example is related but not equivalent to {@link UserRegionLambdaExample}.
- *
- * Note: This example uses lambda expressions and thus works with Java 8+ only.
- */
 public class MergeTest {
 
   @ClassRule
@@ -92,29 +74,33 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    List<User> inputValues = Arrays.asList(
-        //new KeyValue<>("1", new User("1", 25, null)),
-        new User("1", 25, "123 fake street")
+    List<Person> inputValues = Arrays.asList(
+        new Person("1", 25, "123 fake street"),
+        new Person("1", 25, "321 fake street"),
+        new Person("1", 25, ""),
+        new Person("2", 25, "other street"),
+        new Person("1", 30, ""),
+        new Person("3", 29, "third street")
     );
 
-    // List<KeyValue<String, User>> expectedMergedUsers = Arrays.asList(
-    //     new KeyValue<>("1", new User("1", 25, "123 fake street"))
-    // );
-
-    List<KeyValue<String, Long>> expectedMergedUsers = Arrays.asList(new KeyValue<>("1", 1L));
+     List<KeyValue<String, Person>> expectedMergedUsers = Arrays.asList(
+         new KeyValue<>("3", new Person("3", 29, "third street")),   
+         new KeyValue<>("2", new Person("2", 25, "other street")),            
+         new KeyValue<>("1", new Person("1", 30, "321 fake street"))
+     );
 
     //
     // Step 1: Configure and start the processor topology.
     //
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
-    final Serde<User> userSerde = new UserSerde();
+    final Serde<Person> personSerde = new PersonSerde();
 
     Properties streamsConfiguration = new Properties();
-    streamsConfiguration.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-lambda-integration-test");
+    streamsConfiguration.put(StreamsConfig.APPLICATION_ID_CONFIG, "merge-integration-test");
     streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-    streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG,  new UserSerde().getClass().getName());
+    streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG,  new PersonSerde().getClass().getName());
     // The commit interval for flushing records to state stores and downstream must be lower than
     // this integration test's timeout (30 secs) to ensure we observe the expected processing results.
     streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
@@ -125,11 +111,17 @@ public class MergeTest {
 
     KStreamBuilder builder = new KStreamBuilder();
 
-    KTable<String, Long> users = builder.stream(stringSerde, userSerde, inputTopic)
-                                            .groupBy((key, value) -> value.NhsNumber)
-                                            .count("user-store");
+    KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
+                                        .groupBy((key, value) -> value.NhsNumber)
+                                        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber, 
+                                                                            nullCoalesce(newVal.Age, aggVal.Age), 
+                                                                            getFirstNonEmpty(newVal.Address, aggVal.Address)), "merged-store");
 
-    users.to(stringSerde, longSerde, outputTopic);
+    //users.foreach((key, value) -> System.out.println("\n\ninput - value = " + value));
+    // KStream<String,String> sumat = users.grou
+    // users.foreach((key, value) -> System.out.println("\n\ninput - key = " + key));
+
+    people.to(stringSerde, personSerde, outputTopic);
 
     KafkaStreams streams = new KafkaStreams(builder, streamsConfiguration);
     streams.start();
@@ -142,7 +134,7 @@ public class MergeTest {
     producerConfig.put(ProducerConfig.ACKS_CONFIG, "all");
     producerConfig.put(ProducerConfig.RETRIES_CONFIG, 0);
     producerConfig.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-    producerConfig.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, UserSerializer.class);
+    producerConfig.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, PersonSerializer.class);
     IntegrationTestUtils.produceValuesSynchronously(inputTopic, inputValues, producerConfig);
 
     //
@@ -153,11 +145,24 @@ public class MergeTest {
     consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, "wordcount-lambda-integration-test-standard-consumer");
     consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-    consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
-    List<KeyValue<String, Long>> actualOutput = IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig,
-        outputTopic, inputValues.size());
+    
+    consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PersonSerializer.class);
+    
+    List<KeyValue<String, Person>> actualOutput = IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig,
+        outputTopic, expectedMergedUsers.size());
+    
+    
     streams.close();
-    assertThat(actualOutput).containsExactlyElementsOf(expectedMergedUsers);
 
+    System.out.print("\n\n expected -- " + expectedMergedUsers.containsAll(actualOutput));
+
+  }
+
+  public <T extends Object> T nullCoalesce(T first, T second) {
+    return first != null ? first : second;
+  }
+
+  public String getFirstNonEmpty(String first, String second){
+    return first.length() > 0 ? first : second;
   }
 }

@@ -34,7 +34,7 @@ import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.Map;
 
-public class UserSerde implements Serde<User>{
+public class PersonSerde implements Serde<Person>{
 
     @Override
       
@@ -50,12 +50,12 @@ public class UserSerde implements Serde<User>{
     }
 
     @Override
-    public Serializer<User> serializer(){
-        return new UserSerializer();
+    public Serializer<Person> serializer(){
+        return new PersonSerializer();
     }
 
     @Override
-    public Deserializer<User> deserializer(){
-        return new UserSerializer();
+    public Deserializer<Person> deserializer(){
+        return new PersonSerializer();
     }
   }
