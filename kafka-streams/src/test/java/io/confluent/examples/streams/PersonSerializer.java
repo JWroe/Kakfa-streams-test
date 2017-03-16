@@ -29,7 +29,11 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
         if (bytes == null) {
             return null;
         }
-        String[] parts = new String(bytes, CHARSET).split(",", -1);
+        return this.deserialize(new String(bytes, CHARSET));
+    }
+
+    public Person deserialize(String input) {
+        String[] parts = input.split(",", -1);
         return new Person(parts[0], tryParseInt(parts[1]), parts[2]);
     }
 

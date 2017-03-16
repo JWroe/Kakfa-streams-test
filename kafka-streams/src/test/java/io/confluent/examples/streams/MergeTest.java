@@ -2,6 +2,7 @@ package io.confluent.examples.streams;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.*;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import java.nio.file.*;
@@ -47,19 +49,19 @@ public class MergeTest {
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
     final String inputFile = "/tmp/tmpqC7QaE.tmp";
+    final String expectedFile = "/tmp/tmpqC7QaE.tmp";
 
+    List<Person> inputValues = new ArrayList<>();
+
+    PersonSerializer personDes = new PersonSerializer();
     try (Stream<String> stream = Files.lines(Paths.get(inputFile))) {
-      stream.forEach(System.out::println);
+      stream.forEach((line) -> inputValues.add(personDes.deserialize(line)));
     }
 
-    List<Person> inputValues = Arrays.asList(new Person("1", 25, "123 fake street"),
-        new Person("1", 25, "321 fake street"), new Person("2", 25, "other street"), new Person("1", 30, null),
-        new Person("1", null, null), new Person("3", 29, "third street"));
-
-    List<KeyValue<String, Person>> expectedOutput = Arrays.asList(
-        new KeyValue<>("2", new Person("2", 25, "other street")),
-        new KeyValue<>("1", new Person("1", 30, "321 fake street")),
-        new KeyValue<>("3", new Person("3", 29, "third street")));
+    List<KeyValue<String, Person>> expectedOutput = new ArrayList<>();
+    try (Stream<String> stream = Files.lines(Paths.get(inputFile))) {
+      stream.forEach((line) -> expectedOutput.add(new KeyValue<>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line))));
+    }
 
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
