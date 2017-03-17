@@ -31,18 +31,26 @@ public class MergeTest {
   public static final EmbeddedSingleNodeKafkaCluster CLUSTER = new EmbeddedSingleNodeKafkaCluster();
 
   private static final String inputTopic = "input-topic";
-  private static final String outputTopic = "output-topic";
+  private static final String personTopic = "person-topic";  
+  private static final String mergedEventsTopic = "mergedEventsTopic";
+  private static final String breachesTopic = "breachesTopic";
+  private static final String rawCWTEventsTopic = "rawCWTEventsTopic";
+  
+  
 
   @BeforeClass
   public static void startKafkaCluster() throws Exception {
     CLUSTER.createTopic(inputTopic);
-    CLUSTER.createTopic(outputTopic);
+    CLUSTER.createTopic(personTopic);
+    CLUSTER.createTopic(mergedEventsTopic);
+    CLUSTER.createTopic(breachesTopic);
+    CLUSTER.createTopic(rawCWTEventsTopic);    
   }
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmp4MX5zt.tmp";
-    final String expectedFile = "/tmp/tmp4bHuLT.tmp";
+    final String inputFile = "/tmp/tmpTTtjVb.tmp";
+    final String expectedFile = "/tmp/tmpOzV9mb.tmp";
 
     List<CWTEvent> inputValues = new ArrayList<>();
 
@@ -64,7 +72,7 @@ public class MergeTest {
     final Serde<Long> longSerde = Serdes.Long();
     final Serde<CWTEvent> cwtSerde = new CWTEventSerde();
     final Serde<Person> personSerde = new PersonSerde();
-    
+    final Serde<BreachData> breachSerde = new GenericSerde<BreachData>();
 
     Properties streamsConfiguration = new Properties();
     streamsConfiguration.put(StreamsConfig.APPLICATION_ID_CONFIG, "merge-integration-test");
@@ -72,23 +80,28 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, cwtSerde.getClass().getName());
     streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10000);
-    streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
+    // streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
     KStreamBuilder builder = new KStreamBuilder();
 
-    KStream<String, CWTEvent> merged = builder.stream(stringSerde, cwtSerde, inputTopic)
-                                              .selectKey((key, value) -> value.NhsNumber)
-                                              .groupByKey()
-                                              .aggregate(() -> new Person(),
-                                                        (aggKey, newValue, aggValue) -> aggValue.withCWTEvent(newValue),
-                                                        personSerde, "aggregated-person-stream-store")
-                                              .toStream()
-                                              .flatMapValues(person -> person.MergedEvents)
-                                              .selectKey((key, value) -> value.UniqueId);
+    KStream<String, Person> people = builder.stream(stringSerde, cwtSerde, inputTopic)
+                                            .groupBy((key, cwtEvent) -> cwtEvent.NhsNumber)                         //group incoming data by Nhs number
+                                            .aggregate(() -> new Person(),                                          //use incoming data to construct a 'person' object
+                                                      (nhsNum, newEvent, person) -> person.withCWTEvent(newEvent),  //add new CWTEvents that come in into this object
+                                                      personSerde, "aggregated-person-stream-store")
+                                            .toStream()                                                             //convert KTable to a KStream so we can output to a topic
+                                            .through(stringSerde, personSerde, personTopic);                        //output to a topic but keep working with the stream
 
-    merged.to(stringSerde, cwtSerde, outputTopic);
+    people.flatMapValues(person -> person.CWTEvents)                 //create a stream of the incoming cwt events enriched with a new unique id
+          .to(stringSerde, cwtSerde, rawCWTEventsTopic);             //output to a topic and finish working with the stream
+
+    people.flatMapValues(person -> person.MergedEvents)              //output the updated merged events given the person state - this can create quite a lot of redundant data very quickly so we really need caching on to keep performance good
+          .selectKey((nhsNum, cwtEvent) -> cwtEvent.UniqueId)        //use our merged event keys to make sure we only keep the latest state for a given 'merge' 
+          .through(stringSerde, cwtSerde, mergedEventsTopic)         //output to a topic but keep working with the stream
+          .mapValues(cwtEvent -> cwtEvent.calculateBreachData())     //raise the breach data calculated from the merged record
+          .to(stringSerde, breachSerde, breachesTopic);              //output to a topic and finish working with the stream
 
     KafkaStreams streams = new KafkaStreams(builder, streamsConfiguration);
     streams.start();
@@ -98,22 +111,15 @@ public class MergeTest {
     List<KeyValue<String, CWTEvent>> actualOutput = getOutputData(-1);
 
     System.out.println("Actual: " + actualOutput.size() + " records");    
-    actualOutput.forEach((item) -> System.out.println(item));
+    // actualOutput.forEach((item) -> System.out.println(item));
 
     HashMap<String, CWTEvent> latest = getJustLatestValues(actualOutput);
 
     System.out.println("Just Latest: " + latest.size() + " records");
-    latest.forEach((k, v) -> System.out.println("key: " + k + ", value: " + v));
+    // latest.forEach((k, v) -> System.out.println("key: " + k + ", value: " + v));
 
-    // assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
-    assertThat(latest.size() == expectedOutput.size());
+    assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
 
-    CWTEvent[] expectedValues = expectedOutput.values().toArray(new CWTEvent[0]);
-    CWTEvent[] actualValues = latest.values().toArray(new CWTEvent[0]);
-
-    for(int i = 0; i < expectedOutput.size(); i++){
-      assertThat(expectedValues[i].equals(actualValues[i]));
-    }
     streams.close();
   }
 
@@ -164,7 +170,7 @@ public class MergeTest {
     consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, CWTEventSerializer.class);
 
     try {
-      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 1000L);
+      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, mergedEventsTopic, size, 900000L);
     } catch (InterruptedException e) {
       System.out.println(e);
       return null;

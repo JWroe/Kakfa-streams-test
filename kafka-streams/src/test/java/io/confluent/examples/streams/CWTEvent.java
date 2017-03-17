@@ -18,6 +18,17 @@ public class CWTEvent implements Serializable {
         UniqueId = UUID.randomUUID().toString();
     }
 
+    public CWTEvent(CWTEvent event) {
+        NhsNumber = event.NhsNumber;
+        Address = event.Address;
+        Age = event.Age;
+        PatientIdentifierPathway = event.PatientIdentifierPathway;
+        CancerReferralTreatmentPeriodStart = event.CancerReferralTreatmentPeriodStart;
+        CancerTreatmentStartDate = event.CancerTreatmentStartDate;
+        
+        UniqueId = UUID.randomUUID().toString();
+    }
+
     public String UniqueId;
     public String NhsNumber;
     public Integer Age;
@@ -48,6 +59,10 @@ public class CWTEvent implements Serializable {
         return NhsNumber + "," + Age + "," + Address + "," + PatientIdentifierPathway;
     }
 
+    public BreachData calculateBreachData(){
+        return new BreachData();
+    }
+    
     public boolean hasPatientIdentifierPathway() {
         return PatientIdentifierPathway.length() > 0;
     }

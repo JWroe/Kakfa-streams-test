@@ -15,6 +15,7 @@ public class Person implements Serializable {
         }
 
         int matches = 0;
+        //todo: make sure we recalculate merged events if an our of order CWTEvent comes in
         for (CWTEvent mergedEvent : MergedEvents) {
             if (mergedEvent.matches(event)) {
                 matches++;
@@ -23,7 +24,8 @@ public class Person implements Serializable {
         }
 
         if (matches == 0) {
-            MergedEvents.add(event);
+            CWTEvent merged = new CWTEvent(event); //creating a new event so it gets a new id
+            MergedEvents.add(merged);
         }
         if (matches > 1) {
             //error case
