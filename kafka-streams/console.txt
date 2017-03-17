@@ -33,7 +33,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.3:testCompile (default-testCompile) @ streams-examples ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 32 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes
+[INFO] Compiling 33 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes
 [INFO] 
 [INFO] --- scala-maven-plugin:3.2.1:testCompile (default) @ streams-examples ---
 [WARNING]  Expected all dependencies to require Scala version: 2.11.8
@@ -41,7 +41,11 @@
 [WARNING]  org.apache.kafka:kafka_2.11:0.10.2.0-cp1 requires scala version: 2.11.8
 [WARNING]  org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4 requires scala version: 2.11.6
 [WARNING] Multiple versions of scala libraries detected!
-[INFO] Nothing to compile - all classes are up to date
+[INFO] /home/jamie/Git/KafkaExamples/kafka-streams/src/test/java:-1: info: compiling
+[INFO] /home/jamie/Git/KafkaExamples/kafka-streams/target/generated-test-sources/test-annotations:-1: info: compiling
+[INFO] Compiling 33 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes at 1489743363717
+[INFO] prepare-compile in 0 s
+[INFO] compile in 0 s
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ streams-examples ---
 
@@ -49,356 +53,476 @@
  T E S T S
 -------------------------------------------------------
 Running io.confluent.examples.streams.MergeTest
-[2017-03-16 15:50:36,425] WARN [main] No meta.properties file under dir /tmp/junit2964614682071911227/junit4544569702142378304/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-16 15:50:36,646] WARN [main] No meta.properties file under dir /tmp/junit2964614682071911227/junit4544569702142378304/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-16 15:50:36,878] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-16 15:50:36,882] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-16 15:50:36,901] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
-[2017-03-16 15:50:37,312] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-expected -- 
-USER: 88,22,6345cce6-b0f4-4810-9ac4-5b99fb9c1960
-USER: 89,27,6548cad6-a7cc-4dcd-bca2-b6c858f3a62b
-USER: 110,34,8bd87676-c549-477f-b9cb-bc96a6dd162d
-USER: 111,42,bb92f314-8bbb-4b6d-9c14-fa68738c8d80
-USER: 112,78,3a29ec8f-8634-4a67-b71c-3afc8b300d2b
-USER: 113,65,4de04b2a-f624-4ac0-93ee-c95acacb299f
-USER: 114,64,c9aec4a6-5dc4-46d5-82f1-7547c2fde91b
-USER: 115,94,db0fdf4e-5461-4057-9729-1bb7ba31a996
-USER: 116,34,84038d3c-d052-44f7-8434-dbaab1796847
-USER: 117,60,b99f71ed-377f-4990-aaf4-bf7ee778f005
-USER: 90,43,edf23a71-6da6-4cdc-9bf1-c7402f40fb32
-USER: 118,17,e94ecde6-84a8-4863-b730-286906256394
-USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead
-USER: 92,31,44c5a6b8-b2de-41dc-b13e-f00d437d346b
-USER: 119,28,415de640-0850-406c-9153-fcbd8a07e60f
-USER: 93,37,fcaf65c2-fdcc-429f-8c4d-43750b2ba56b
-USER: 94,77,51cbdc3c-6ee2-45a3-a76e-187369e6915d
-USER: 95,34,d4816bf1-303d-4735-a5cd-fd654a9bd748
-USER: 96,29,a83586c3-de79-4aa1-8fb9-626c1c5e4ca8
-USER: 97,86,e6e3978a-159c-4fab-98e3-d01dcd4fe32c
-USER: 10,25,a7656d5d-bed1-4ef7-aea3-1f890e5602b5
-USER: 98,52,29f1a764-0b20-4a01-83ee-06d9daad9476
-USER: 99,65,9b8afc03-e375-4ea4-8464-cb1fbed2e25a
-USER: 11,60,5357576f-0e70-49b3-be1a-c101c11a08a7
-USER: 12,15,31d5c0c7-fce2-4762-a56b-ef15137c1183
-USER: 13,13,35e05875-c57e-429d-9c9b-ca216197db0a
-USER: 14,36,0413f03f-4b74-441a-bf03-142dca929bd9
-USER: 15,81,26b77c17-9a51-48ae-8818-412096387b3e
-USER: 16,57,4a9f418c-ee0b-422b-ad44-0e84923701f9
-USER: 17,10,2165790c-3e66-4625-be10-7ae25d8f1d84
-USER: 18,20,338d4675-eae9-4afb-8272-d562e4df19a2
-USER: 19,18,6373e9ef-59de-42e3-8402-8f3c3500c46f
-USER: 120,80,49845b0b-2d09-4244-af35-56ac29033ce2
-USER: 121,44,9281af68-f7b9-4124-baa7-6b3c23e25c0f
-USER: 0,65,70d6d6c2-5e17-4d30-9cd0-428a4ed31b7d
-USER: 1,77,004ca446-41ba-4e7c-b190-95642bf6f168
-USER: 122,43,3c1f7a28-a375-4477-afc9-bcbf01fa04a2
-USER: 2,12,00b29233-dbd4-4a57-82bc-12eb8f136b62
-USER: 123,97,ffc709fc-e8d5-447e-b1bf-3c8161b50bfa
-USER: 124,17,92539cc4-cdb1-4873-9c9e-35256dd8ce54
-USER: 3,91,2b7fc10d-1efd-46ee-a2ba-f916d8931b56
-USER: 125,96,29ff87dd-3a30-4412-a618-3111aa91bcd1
-USER: 4,28,470896ba-9fdf-4182-a7a9-17f20878c55f
-USER: 5,63,c90248c3-0284-40cb-9159-422d80393b81
-USER: 126,12,cef3f880-39a0-41f3-a5b4-4c3db9060fd3
-USER: 127,48,e06b99c3-a228-4a4d-9560-f1b0291403e1
-USER: 6,25,6aeb77f2-28b9-494f-b133-381b1a8739b0
-USER: 128,97,bdfc68a8-887b-4dff-acf5-c334301a41df
-USER: 7,87,95160d65-186f-4ac5-aa11-67b8834e2798
-USER: 8,19,bc65d13c-a88d-472b-b2fe-e286948d8ede
-USER: 129,67,ca9b5e0e-edf2-4611-a4d1-6f2e49c52fa2
-USER: 9,65,60731529-0d0b-461f-8f71-ea5f5dec70c7
-USER: 20,98,e4715fea-291d-41d6-9c9d-15a6a26a2f9b
-USER: 21,20,53c9be05-06fc-4a51-b0f6-1f216f3a7662
-USER: 22,19,188ac5af-8b18-4bd3-9aea-931afe90ee7a
-USER: 23,76,09be7751-a19f-4f6b-acce-e7f19013f7cb
-USER: 24,46,d636c247-95e2-4eb3-8587-3d06870ed011
-USER: 25,67,d498f765-ce2d-450a-9c07-09f953e5493f
-USER: 26,67,f1577cc5-adfc-49ff-a619-850fdb0355ae
-USER: 27,43,eb7b6647-f979-4d3c-9b05-286bddeefe3c
-USER: 28,27,db172e0d-09e7-4022-b820-1021f094b0ff
-USER: 29,48,21d269c7-924f-4d0f-82e3-a82fa5337bc0
-USER: 130,25,75449770-b0ff-4f52-8f62-73ac291e41c3
-USER: 131,73,896edfef-f959-4bfd-93f8-024ba8cdcac1
-USER: 132,17,2f93112e-b884-4d34-9140-ca2fef335706
-USER: 133,74,fab417c7-1d8d-4907-b958-b8eb784d78a8
-USER: 134,65,f333ddd1-893f-483d-985a-f1f4d973970a
-USER: 135,36,6a6fe72c-118b-444b-8d3c-2553a5024386
-USER: 136,57,83e40fd9-a2b7-4f21-83c9-99fec5b39cd0
-USER: 137,82,293fd7a5-1bb5-48a3-a36d-4c96f2d35f07
-USER: 138,60,0bd33144-3baa-4100-9f63-255ea05f994e
-USER: 139,43,eda3f844-b25f-4665-8998-0e0fabdc85d6
-USER: 30,18,5fc809c8-65c5-4a5c-84a4-6f9c61e49e37
-USER: 31,74,97209b10-92ab-4d56-9fe2-a210b9b0287a
-USER: 32,23,140ddc5a-6e2b-4f58-9a4a-d241cb2bb22f
-USER: 33,85,5c584179-a69d-4066-af81-47d135e0af12
-USER: 34,26,c1f83f49-9a24-4e15-b718-5b7fb2d42f88
-USER: 35,13,d5228f0b-8f3d-4a14-a746-8e488a9aeef4
-USER: 36,16,6b8faa1d-f628-4cf5-896a-7e2b5f197932
-USER: 37,54,ceb123d4-b7a8-4b44-b61f-451994e92847
-USER: 38,83,f71cac2d-f09e-4432-bc30-f804633d3739
-USER: 39,39,92b1ee16-3827-4340-a4c6-b8fad159fbeb
-USER: 140,40,a63e087b-760f-46c9-bf14-9d9ec52eaa3d
-USER: 141,13,40ef8ba3-198b-419c-a894-3fb51ee747ee
-USER: 142,11,5092e39a-3e03-4868-8444-0dcc1e275a28
-USER: 143,23,ff006bc0-707a-4489-b422-c77bc36b12fa
-USER: 144,86,855a62c0-9f25-4db5-a1b1-30c2afc36a55
-USER: 145,14,10078d51-7e64-48d0-a564-d77b0a5c1f82
-USER: 146,47,178ff53f-5a95-4a35-af58-4a1fbc6cd2f9
-USER: 147,80,0fb6dc99-729b-4083-b886-8c40e903bb55
-USER: 148,93,a9d96fb6-6d06-485b-aa17-1cd575808d1c
-USER: 149,75,bf7ce5d2-cb16-4540-b5e8-4dad26f78798
-USER: 40,29,eac098dd-a409-4ea1-a60e-b42a9658d7e6
-USER: 41,59,8a2bd2ad-9dc3-4996-91d3-4975daea133d
-USER: 42,48,2c21c729-c162-413c-96e6-e7ee660a2d7f
-USER: 43,24,5fe5e93b-c283-47c1-b6c7-4a03f95380dc
-USER: 44,50,32aa5670-a654-46ee-875c-7ca9afeee1fa
-USER: 45,14,a1d0801f-c07b-40df-a6ee-764d498b946e
-USER: 46,24,8a082be3-ebe3-41f9-9325-201ea694c6fc
-USER: 47,26,1a59c354-7e53-44d3-8031-285dc3fdebb1
-USER: 48,90,caabffc1-454b-4189-919f-e3d35b5ee6b3
-USER: 49,52,0a3118f3-aa8d-435e-844d-779f68d9d4af
-USER: 50,55,c5df2627-f89b-41cb-ac0d-3e95e0689409
-USER: 51,74,5b982969-dd8d-47a5-a10f-736527c3f341
-USER: 52,51,dfe6774e-1e12-4805-a21b-40d1b3e9f97f
-USER: 53,62,bb54eec4-3a90-47b3-b0fd-60ff6c2265b8
-USER: 54,82,7ea7068a-5a7c-40d5-8793-27133b39cf71
-USER: 55,44,b6adb379-9ff6-4c56-a9f8-95248a347549
-USER: 56,61,2107f321-9f0e-496d-9071-1672089b1040
-USER: 57,13,d475956e-5e6b-4060-a84d-7952205609c7
-USER: 58,69,b4188b41-0a03-4dcd-b7c1-8382b0436264
-USER: 59,67,aed48c1c-1c3d-4a9e-aacd-ee845e28dddf
-USER: 60,86,6d816308-b222-455d-878f-52ae3c881dd9
-USER: 61,30,6e4f2b98-05d2-4551-a741-49d870f2cfd2
-USER: 62,34,29e94325-7d2d-4880-aa7a-93a16695adee
-USER: 63,40,95551409-b590-4b20-8536-548048d5bb20
-USER: 64,37,dd795a35-5e8c-402b-a780-9a5c03fc5627
-USER: 65,91,ba3265ba-e21a-4ab5-af8f-bf9bb4e0244e
+[2017-03-17 09:36:06,658] WARN [main] No meta.properties file under dir /tmp/junit7950510090201450365/junit6332159738271315615/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-17 09:36:06,875] WARN [main] No meta.properties file under dir /tmp/junit7950510090201450365/junit6332159738271315615/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-17 09:36:07,073] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 09:36:07,076] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 09:36:07,094] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
+[2017-03-17 09:36:07,506] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
 USER: 66,36,cc005c37-fb4e-468d-8b74-4a77f425130d
-USER: 67,93,8b8fe613-f7de-4141-a3e7-aa00cc4c58dc
-USER: 68,59,5bee2cbb-c46a-450d-a87c-4e500a02bb27
-USER: 69,41,9e3f086e-80aa-428f-9a1c-e988f77455da
-USER: 70,49,04a1ed0e-def6-411d-8c1b-24d0a0dfabad
-USER: 71,30,8fc563f5-dafb-45ec-85d0-3e22d7d2e895
-USER: 72,22,2b52b176-743e-4003-86b5-f4d5677a80c2
-USER: 73,22,01b4bad1-0ae8-4b4d-8ccf-e5272bd348b4
-USER: 74,31,12fcc524-7252-4992-b112-ab4e94e806aa
-USER: 75,45,78d6848c-cb8f-46af-a4c5-0766e87dec12
-USER: 76,15,60677dba-2ae3-4487-9148-c861a8f057ba
-USER: 77,78,e1cb77a2-b6b7-4efa-a480-9f940f8358cd
-USER: 78,86,6cca259b-fb7c-4679-a1bf-aa769439c9bc
-USER: 79,43,e9f5e413-5422-4d78-bfdd-a45fe6f1c4f1
-USER: 100,50,f96c2a88-dee4-406c-beff-841dd7086e0d
-USER: 101,87,7a2fb29e-8e7f-4063-8376-9bc4ef14df66
-USER: 102,16,314e9612-19ec-498e-aeef-f3dc67d2aa73
-USER: 103,89,0e0fd3a9-ed57-4835-aa1d-1b7c7c5b6f29
-USER: 104,29,b03af1c5-3c20-4d67-8ca3-a655a27f5474
-USER: 105,39,2ca91ebb-677a-464e-bdb0-9900768f246c
-USER: 106,86,5e0a64a9-c613-4edc-92fa-96eea59d68a9
+USER: 36,16,6b8faa1d-f628-4cf5-896a-7e2b5f197932
+USER: 137,82,293fd7a5-1bb5-48a3-a36d-4c96f2d35f07
 USER: 107,14,57578969-efee-4b33-a247-6696b2d825fb
-USER: 80,90,c88fc63f-aead-40fc-8a9b-02e54fee8e11
-USER: 108,23,c0c37138-c09a-48ae-a1b0-43a88cb5cf55
-USER: 81,79,57e8eae9-4bcd-42ab-848e-48429002bfce
-USER: 109,15,8007bfe2-59de-4718-891e-583a22865d2c
-USER: 82,76,26cc96bb-e0c9-4146-9766-f28405f59e9c
-USER: 83,76,ff5f10df-da74-498f-ac2e-ba3faf68ae7d
-USER: 84,86,c010f83c-e153-4bae-93a1-24c5bbfff589
 USER: 85,34,32dcd501-8b99-4bbd-9407-461c1c5b9358
-USER: 86,72,35b75858-ac3f-4c24-a1f8-d76355af8b94
+USER: 135,36,6a6fe72c-118b-444b-8d3c-2553a5024386
+USER: 109,15,8007bfe2-59de-4718-891e-583a22865d2c
+USER: 1,77,004ca446-41ba-4e7c-b190-95642bf6f168
+USER: 26,67,f1577cc5-adfc-49ff-a619-850fdb0355ae
+USER: 141,13,40ef8ba3-198b-419c-a894-3fb51ee747ee
+USER: 136,57,83e40fd9-a2b7-4f21-83c9-99fec5b39cd0
+USER: 127,48,e06b99c3-a228-4a4d-9560-f1b0291403e1
+USER: 97,86,e6e3978a-159c-4fab-98e3-d01dcd4fe32c
+USER: 57,13,d475956e-5e6b-4060-a84d-7952205609c7
+USER: 96,29,a83586c3-de79-4aa1-8fb9-626c1c5e4ca8
+USER: 94,77,51cbdc3c-6ee2-45a3-a76e-187369e6915d
+USER: 99,65,9b8afc03-e375-4ea4-8464-cb1fbed2e25a
+USER: 117,60,b99f71ed-377f-4990-aaf4-bf7ee778f005
+USER: 10,25,a7656d5d-bed1-4ef7-aea3-1f890e5602b5
+USER: 80,90,c88fc63f-aead-40fc-8a9b-02e54fee8e11
+USER: 31,74,97209b10-92ab-4d56-9fe2-a210b9b0287a
+USER: 38,83,f71cac2d-f09e-4432-bc30-f804633d3739
+USER: 30,18,5fc809c8-65c5-4a5c-84a4-6f9c61e49e37
+USER: 45,14,a1d0801f-c07b-40df-a6ee-764d498b946e
+USER: 72,22,2b52b176-743e-4003-86b5-f4d5677a80c2
+USER: 90,43,edf23a71-6da6-4cdc-9bf1-c7402f40fb32
+USER: 29,48,21d269c7-924f-4d0f-82e3-a82fa5337bc0
+USER: 106,86,5e0a64a9-c613-4edc-92fa-96eea59d68a9
+USER: 56,61,2107f321-9f0e-496d-9071-1672089b1040
+USER: 147,80,0fb6dc99-729b-4083-b886-8c40e903bb55
+USER: 61,30,6e4f2b98-05d2-4551-a741-49d870f2cfd2
+USER: 108,23,c0c37138-c09a-48ae-a1b0-43a88cb5cf55
+USER: 100,50,f96c2a88-dee4-406c-beff-841dd7086e0d
+USER: 2,12,00b29233-dbd4-4a57-82bc-12eb8f136b62
+USER: 133,74,fab417c7-1d8d-4907-b958-b8eb784d78a8
+USER: 15,81,26b77c17-9a51-48ae-8818-412096387b3e
+USER: 9,65,60731529-0d0b-461f-8f71-ea5f5dec70c7
+USER: 33,85,5c584179-a69d-4066-af81-47d135e0af12
+USER: 89,27,6548cad6-a7cc-4dcd-bca2-b6c858f3a62b
+USER: 145,14,10078d51-7e64-48d0-a564-d77b0a5c1f82
+USER: 8,19,bc65d13c-a88d-472b-b2fe-e286948d8ede
+USER: 128,97,bdfc68a8-887b-4dff-acf5-c334301a41df
+USER: 19,18,6373e9ef-59de-42e3-8402-8f3c3500c46f
+USER: 55,44,b6adb379-9ff6-4c56-a9f8-95248a347549
+USER: 13,13,35e05875-c57e-429d-9c9b-ca216197db0a
+USER: 21,20,53c9be05-06fc-4a51-b0f6-1f216f3a7662
+USER: 6,25,6aeb77f2-28b9-494f-b133-381b1a8739b0
+USER: 5,63,c90248c3-0284-40cb-9159-422d80393b81
+USER: 115,94,db0fdf4e-5461-4057-9729-1bb7ba31a996
+USER: 78,86,6cca259b-fb7c-4679-a1bf-aa769439c9bc
+USER: 88,22,6345cce6-b0f4-4810-9ac4-5b99fb9c1960
+USER: 32,23,140ddc5a-6e2b-4f58-9a4a-d241cb2bb22f
+USER: 116,34,84038d3c-d052-44f7-8434-dbaab1796847
+USER: 69,41,9e3f086e-80aa-428f-9a1c-e988f77455da
+USER: 75,45,78d6848c-cb8f-46af-a4c5-0766e87dec12
+USER: 102,16,314e9612-19ec-498e-aeef-f3dc67d2aa73
+USER: 37,54,ceb123d4-b7a8-4b44-b61f-451994e92847
+USER: 41,59,8a2bd2ad-9dc3-4996-91d3-4975daea133d
+USER: 93,37,fcaf65c2-fdcc-429f-8c4d-43750b2ba56b
+USER: 47,26,1a59c354-7e53-44d3-8031-285dc3fdebb1
+USER: 112,78,3a29ec8f-8634-4a67-b71c-3afc8b300d2b
+USER: 144,86,855a62c0-9f25-4db5-a1b1-30c2afc36a55
+USER: 76,15,60677dba-2ae3-4487-9148-c861a8f057ba
+USER: 48,90,caabffc1-454b-4189-919f-e3d35b5ee6b3
+USER: 71,30,8fc563f5-dafb-45ec-85d0-3e22d7d2e895
+USER: 17,10,2165790c-3e66-4625-be10-7ae25d8f1d84
+USER: 103,89,0e0fd3a9-ed57-4835-aa1d-1b7c7c5b6f29
+USER: 83,76,ff5f10df-da74-498f-ac2e-ba3faf68ae7d
+USER: 138,60,0bd33144-3baa-4100-9f63-255ea05f994e
+USER: 23,76,09be7751-a19f-4f6b-acce-e7f19013f7cb
+USER: 63,40,95551409-b590-4b20-8536-548048d5bb20
+USER: 122,43,3c1f7a28-a375-4477-afc9-bcbf01fa04a2
+USER: 35,13,d5228f0b-8f3d-4a14-a746-8e488a9aeef4
+USER: 54,82,7ea7068a-5a7c-40d5-8793-27133b39cf71
+USER: 52,51,dfe6774e-1e12-4805-a21b-40d1b3e9f97f
+USER: 126,12,cef3f880-39a0-41f3-a5b4-4c3db9060fd3
+USER: 42,48,2c21c729-c162-413c-96e6-e7ee660a2d7f
+USER: 62,34,29e94325-7d2d-4880-aa7a-93a16695adee
+USER: 14,36,0413f03f-4b74-441a-bf03-142dca929bd9
+USER: 74,31,12fcc524-7252-4992-b112-ab4e94e806aa
+USER: 118,17,e94ecde6-84a8-4863-b730-286906256394
+USER: 124,17,92539cc4-cdb1-4873-9c9e-35256dd8ce54
+USER: 46,24,8a082be3-ebe3-41f9-9325-201ea694c6fc
 USER: 87,63,9adbcea8-17bf-48b0-816b-0a324569b343
-
+USER: 132,17,2f93112e-b884-4d34-9140-ca2fef335706
+USER: 125,96,29ff87dd-3a30-4412-a618-3111aa91bcd1
+USER: 40,29,eac098dd-a409-4ea1-a60e-b42a9658d7e6
+USER: 11,60,5357576f-0e70-49b3-be1a-c101c11a08a7
+USER: 86,72,35b75858-ac3f-4c24-a1f8-d76355af8b94
+USER: 92,31,44c5a6b8-b2de-41dc-b13e-f00d437d346b
+USER: 104,29,b03af1c5-3c20-4d67-8ca3-a655a27f5474
+USER: 149,75,bf7ce5d2-cb16-4540-b5e8-4dad26f78798
+USER: 70,49,04a1ed0e-def6-411d-8c1b-24d0a0dfabad
+USER: 79,43,e9f5e413-5422-4d78-bfdd-a45fe6f1c4f1
+USER: 65,91,ba3265ba-e21a-4ab5-af8f-bf9bb4e0244e
+USER: 60,86,6d816308-b222-455d-878f-52ae3c881dd9
+USER: 121,44,9281af68-f7b9-4124-baa7-6b3c23e25c0f
+USER: 77,78,e1cb77a2-b6b7-4efa-a480-9f940f8358cd
+USER: 22,19,188ac5af-8b18-4bd3-9aea-931afe90ee7a
+USER: 105,39,2ca91ebb-677a-464e-bdb0-9900768f246c
+USER: 0,65,70d6d6c2-5e17-4d30-9cd0-428a4ed31b7d
+USER: 98,52,29f1a764-0b20-4a01-83ee-06d9daad9476
+USER: 114,64,c9aec4a6-5dc4-46d5-82f1-7547c2fde91b
+USER: 49,52,0a3118f3-aa8d-435e-844d-779f68d9d4af
+USER: 59,67,aed48c1c-1c3d-4a9e-aacd-ee845e28dddf
+USER: 3,91,2b7fc10d-1efd-46ee-a2ba-f916d8931b56
+USER: 140,40,a63e087b-760f-46c9-bf14-9d9ec52eaa3d
+USER: 73,22,01b4bad1-0ae8-4b4d-8ccf-e5272bd348b4
+USER: 39,39,92b1ee16-3827-4340-a4c6-b8fad159fbeb
+USER: 16,57,4a9f418c-ee0b-422b-ad44-0e84923701f9
+USER: 84,86,c010f83c-e153-4bae-93a1-24c5bbfff589
+USER: 64,37,dd795a35-5e8c-402b-a780-9a5c03fc5627
+USER: 139,43,eda3f844-b25f-4665-8998-0e0fabdc85d6
+USER: 51,74,5b982969-dd8d-47a5-a10f-736527c3f341
+USER: 18,20,338d4675-eae9-4afb-8272-d562e4df19a2
+USER: 134,65,f333ddd1-893f-483d-985a-f1f4d973970a
+USER: 142,11,5092e39a-3e03-4868-8444-0dcc1e275a28
+USER: 120,80,49845b0b-2d09-4244-af35-56ac29033ce2
+USER: 58,69,b4188b41-0a03-4dcd-b7c1-8382b0436264
+USER: 131,73,896edfef-f959-4bfd-93f8-024ba8cdcac1
+USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead
+USER: 28,27,db172e0d-09e7-4022-b820-1021f094b0ff
+USER: 130,25,75449770-b0ff-4f52-8f62-73ac291e41c3
+USER: 129,67,ca9b5e0e-edf2-4611-a4d1-6f2e49c52fa2
+USER: 53,62,bb54eec4-3a90-47b3-b0fd-60ff6c2265b8
+USER: 146,47,178ff53f-5a95-4a35-af58-4a1fbc6cd2f9
+USER: 20,98,e4715fea-291d-41d6-9c9d-15a6a26a2f9b
+USER: 119,28,415de640-0850-406c-9153-fcbd8a07e60f
+USER: 68,59,5bee2cbb-c46a-450d-a87c-4e500a02bb27
+USER: 82,76,26cc96bb-e0c9-4146-9766-f28405f59e9c
+USER: 95,34,d4816bf1-303d-4735-a5cd-fd654a9bd748
+USER: 34,26,c1f83f49-9a24-4e15-b718-5b7fb2d42f88
+USER: 27,43,eb7b6647-f979-4d3c-9b05-286bddeefe3c
+USER: 50,55,c5df2627-f89b-41cb-ac0d-3e95e0689409
+USER: 24,46,d636c247-95e2-4eb3-8587-3d06870ed011
+USER: 110,34,8bd87676-c549-477f-b9cb-bc96a6dd162d
+USER: 12,15,31d5c0c7-fce2-4762-a56b-ef15137c1183
+USER: 7,87,95160d65-186f-4ac5-aa11-67b8834e2798
+USER: 113,65,4de04b2a-f624-4ac0-93ee-c95acacb299f
+USER: 4,28,470896ba-9fdf-4182-a7a9-17f20878c55f
+USER: 81,79,57e8eae9-4bcd-42ab-848e-48429002bfce
+USER: 148,93,a9d96fb6-6d06-485b-aa17-1cd575808d1c
+USER: 43,24,5fe5e93b-c283-47c1-b6c7-4a03f95380dc
+USER: 101,87,7a2fb29e-8e7f-4063-8376-9bc4ef14df66
+USER: 143,23,ff006bc0-707a-4489-b422-c77bc36b12fa
+USER: 25,67,d498f765-ce2d-450a-9c07-09f953e5493f
+USER: 111,42,bb92f314-8bbb-4b6d-9c14-fa68738c8d80
+USER: 44,50,32aa5670-a654-46ee-875c-7ca9afeee1fa
+USER: 67,93,8b8fe613-f7de-4141-a3e7-aa00cc4c58dc
+USER: 123,97,ffc709fc-e8d5-447e-b1bf-3c8161b50bfa
+KeyValue(88, USER: 88,19,29a059ac-3821-4296-af58-d7351ae51957)
+KeyValue(19, USER: 19,93,3dd11d0a-e0d8-4092-adc1-a9c70cf16fc3)
+KeyValue(78, USER: 78,51,fb29eea2-c2f6-4a69-9f12-424225747592)
+KeyValue(64, USER: 64,76,952cdfc4-1c6d-4857-a1b0-8a4b329326f9)
+KeyValue(113, USER: 113,13,3b8061da-197e-4330-83f9-b563769b279e)
+KeyValue(102, USER: 102,48,fb6030b7-de0c-427d-83b2-9eca7d00e2f9)
+KeyValue(39, USER: 39,36,de4f6094-a746-40c1-bbbb-2078228cd9fb)
+KeyValue(148, USER: 148,25,16225436-2c0a-448d-bde3-482b4f5553f7)
+KeyValue(21, USER: 21,38,b41b09ef-c338-4cc6-a396-164936f3e963)
+KeyValue(67, USER: 67,17,3a77506b-f661-45ec-a536-1164b1b4c117)
+KeyValue(66, USER: 66,15,de1861ce-8eb9-4531-a55a-cc3c2fb8e75d)
+KeyValue(46, USER: 46,75,e64632e4-14ef-49cc-bc71-cda120c16216)
+KeyValue(48, USER: 48,52,4243330b-f8d9-4a96-bcd9-b19308300e3e)
+KeyValue(55, USER: 55,25,86bf9bdb-fe18-4d24-b56b-1f4016024348)
+KeyValue(24, USER: 24,70,6de34296-da72-49ba-abcb-715bd4537e83)
+KeyValue(42, USER: 42,71,618e0a7a-e52e-4bbf-bfec-11f2a25ddee6)
+KeyValue(80, USER: 80,58,d1d351df-bd48-44d2-bb2e-6bcc23bd14cc)
+KeyValue(70, USER: 70,82,876aedd7-9969-4b5f-9c91-2b4aa9a60138)
+KeyValue(29, USER: 29,93,1ebe2938-45a5-4ef4-8335-3cbed2cfbe8e)
+KeyValue(130, USER: 130,26,1f121b5d-b30d-4e5d-b064-db1d9e512817)
+KeyValue(69, USER: 69,92,e63d0b2f-0fae-42a4-961f-bd56e8a71494)
+KeyValue(99, USER: 99,12,5e2aa8bc-90e9-464e-9dc3-73596ae1d864)
+KeyValue(107, USER: 107,99,63d42572-c3ae-4722-b4ea-4dc8c872cf15)
+KeyValue(60, USER: 60,17,0d8a12b5-9bb1-4b88-888a-4ea1d4573451)
+KeyValue(144, USER: 144,98,01f4fdfd-7886-4c4e-806a-34a1cb150d5e)
+KeyValue(135, USER: 135,55,38225e37-ffbb-4167-b623-ebb066882cd9)
+KeyValue(52, USER: 52,87,b1786e1e-f18b-4e57-8245-872b3cf508f6)
+KeyValue(131, USER: 131,56,771f4b1b-9b05-4826-a2c0-b8a125cca95d)
+KeyValue(22, USER: 22,43,560c9d66-d65f-4612-8505-cd8c3f654c9c)
+KeyValue(137, USER: 137,98,79df3c5c-5cbc-4259-970c-c4445c77e169)
+KeyValue(30, USER: 30,50,bb70f2a5-4d40-4861-bc10-ed54304abb91)
+KeyValue(92, USER: 92,60,ae194933-3a4b-408a-9de3-91512ecd042d)
+KeyValue(5, USER: 5,58,9cae0570-18a0-4873-88b5-7b265b0263ad)
+KeyValue(126, USER: 126,90,fba4ee63-171e-4980-9e9e-3a91eead9167)
+KeyValue(97, USER: 97,13,947b246a-4da9-4b02-bc46-b7221f59ac79)
+KeyValue(87, USER: 87,76,e209d297-b7da-4c00-9558-05a06c0e90ef)
+KeyValue(95, USER: 95,94,17cbaa99-a65c-4052-8b07-b8430a888c2f)
+KeyValue(28, USER: 28,98,146f4fa9-ec37-4994-bd8e-de4bdad55385)
+KeyValue(20, USER: 20,53,280ea747-537f-4e68-a86f-94874acba3b9)
+KeyValue(138, USER: 138,44,c9e7b08e-10f2-41a5-af8b-151e9651bd09)
+KeyValue(14, USER: 14,86,595bc6dc-6ae8-4829-8f43-5cefb4558cc0)
+KeyValue(100, USER: 100,43,e5da9ce0-25b9-4aa5-adc6-a8927b7e285a)
+KeyValue(129, USER: 129,27,a431bd97-e011-404a-b508-9bde8fd25692)
+KeyValue(4, USER: 4,54,a9030c5e-5ee6-46df-a515-0907dc485756)
+KeyValue(0, USER: 0,54,e03c9c5b-89a9-4073-8b44-55b735de3fc6)
+KeyValue(47, USER: 47,53,b81a063a-4370-4fe4-b12f-931bcf16fb92)
+KeyValue(44, USER: 44,21,5a1f9cbe-2534-4ab5-be23-3d00adf08e81)
+KeyValue(51, USER: 51,38,e45806a9-dd08-458c-9a2c-41ef0fa3749d)
+KeyValue(35, USER: 35,70,d19f77f5-5c29-4da8-b6ac-01bd98ac1cd1)
+KeyValue(85, USER: 85,97,e474daae-cea6-442d-bdf8-fc31f7b50cae)
+KeyValue(82, USER: 82,80,47d559ee-a3ca-4855-bcd4-29087865bf0f)
+KeyValue(12, USER: 12,91,7faefcec-c454-4e50-bb3d-12bd91e25713)
+KeyValue(18, USER: 18,60,6ca209c6-349d-4b55-93d9-c63106163a62)
+KeyValue(38, USER: 38,19,507087e3-60e1-4473-ad81-1ce60f4a5d63)
+KeyValue(112, USER: 112,77,d28fc249-2ccd-4b81-bfbb-837ea3eadff1)
+KeyValue(96, USER: 96,13,42c1c284-bebf-4a4a-8053-1e6967955fe6)
+KeyValue(94, USER: 94,96,10ecd23b-7c52-4b8c-85a6-5ca555920143)
+KeyValue(58, USER: 58,11,5d0f6747-75b1-4c52-b152-45406c344b3c)
+KeyValue(125, USER: 125,99,34f06383-52e3-4f53-9408-10ba0bf20e77)
+KeyValue(143, USER: 143,95,48eb3cd7-d1e0-4c1c-8f01-162e251ce268)
+KeyValue(71, USER: 71,95,d216548e-0575-4bec-82da-b3f2c961f707)
+KeyValue(140, USER: 140,50,334ffe9c-51bf-4262-a96a-fc000166e443)
+KeyValue(132, USER: 132,83,74612335-9ed8-4dcc-a16e-5009ece8222d)
+KeyValue(56, USER: 56,77,80a20105-4ab0-4d03-8696-95aa5a1ee911)
+KeyValue(62, USER: 62,25,91b6a1f7-9ae7-4053-864b-d9f9c340e046)
+KeyValue(101, USER: 101,58,af07a5e2-acbc-4421-a16e-e732ae75ee67)
+KeyValue(16, USER: 16,41,86282cad-afbd-4419-a92f-635ff7ebd031)
+KeyValue(139, USER: 139,79,bba46806-4a2b-45ab-84ad-ea012729c98e)
+KeyValue(90, USER: 90,60,b796aece-d6b3-4e62-a669-bf6ba4ba7102)
+KeyValue(149, USER: 149,72,7e72ef3b-267a-4dce-abea-440c4a72a65d)
+KeyValue(84, USER: 84,18,3116ef8e-2c63-46c0-aa8c-1911e39326ca)
+KeyValue(6, USER: 6,89,ffaa1992-2df4-4f51-8aed-a455dead05c8)
+KeyValue(118, USER: 118,23,9fd94553-0595-4176-a374-2d1f44b85e14)
+KeyValue(43, USER: 43,26,c9e7a780-3bc6-4c3c-b685-09f28c853f58)
+KeyValue(10, USER: 10,63,3a63c252-35f1-441f-ab3a-3de43cea11d8)
+KeyValue(145, USER: 145,65,de89af06-1d7d-417f-a7b2-7af34a4acfc9)
+KeyValue(53, USER: 53,30,c0fe2519-d297-4156-ab71-b2288fab6bdf)
+KeyValue(25, USER: 25,44,64a9842e-e228-4a67-a43d-350cbea1d1f6)
+KeyValue(146, USER: 146,53,c3d35dcd-abb8-4a68-96cf-165eaedf71b6)
+KeyValue(124, USER: 124,64,4938b77a-65dd-4287-8f69-331ab4f7b00e)
+KeyValue(136, USER: 136,20,bf1f81df-b1bd-4653-933d-09c9efe3fb5e)
+KeyValue(108, USER: 108,97,0801480c-2fae-43db-bbd6-6c5604e38fc4)
+KeyValue(120, USER: 120,94,f622ebfd-6afa-433e-8757-0b06b8cc43e2)
+KeyValue(89, USER: 89,10,b61efad0-a5bd-4b74-afd6-e052a3471fdf)
+KeyValue(147, USER: 147,15,d7dc92ff-95f8-4dc3-8689-3bac48bb3fd4)
+KeyValue(98, USER: 98,44,51a344b4-c161-4a97-b90c-9cd6d18081aa)
+KeyValue(105, USER: 105,61,e2877fdb-d60b-4329-a8d8-6b5d4dd27da6)
+KeyValue(8, USER: 8,85,920e5452-b488-42ff-b12f-519849278ba1)
+KeyValue(61, USER: 61,45,bd3fae9b-fe99-4d1c-a405-e39a45f85ae1)
+KeyValue(49, USER: 49,18,cb6bb556-3278-4784-a080-3be34868fe72)
+KeyValue(57, USER: 57,22,9e33f909-38e3-4920-99bd-e77f4abdb42c)
+KeyValue(115, USER: 115,66,acd0c746-022f-45ab-ada9-a3034460d936)
+KeyValue(93, USER: 93,50,b8d4ac43-0284-4ff4-b32c-aafe34cd074c)
+KeyValue(74, USER: 74,62,1d8a6368-27b6-4520-8e7b-d4aa35665109)
+KeyValue(63, USER: 63,14,3cfb6cdd-20cb-407a-b8eb-a33093c7bf5b)
+KeyValue(79, USER: 79,60,f9407999-8b02-4fe9-ad7d-3db5bcc7dfa5)
+KeyValue(3, USER: 3,11,c768cd59-c0ca-4a85-864f-aad25082b977)
+KeyValue(73, USER: 73,29,e0aab306-567e-42d8-b47f-cfc5d5599c54)
+KeyValue(128, USER: 128,79,fd7c9b6f-a455-440f-8bab-a88cf466f00d)
+KeyValue(114, USER: 114,35,1c46bac3-08f0-4278-a26e-8023fba7c6c9)
+KeyValue(81, USER: 81,30,59050109-8e24-4ae5-acce-e469b813c384)
+KeyValue(121, USER: 121,63,32d4391c-91ce-4ab0-9c80-f6bfde9d2acc)
+KeyValue(45, USER: 45,97,998e8e92-9114-4841-b8c0-305b8c3e8547)
+KeyValue(34, USER: 34,39,25d627f0-5a6f-4df4-9c79-50cccdee5a1c)
+KeyValue(37, USER: 37,17,ee4049f9-09ad-438e-9402-71cb2b2b4da7)
+KeyValue(72, USER: 72,53,ec666c3c-dafa-4fdd-80a0-446c4c58ea5c)
+KeyValue(119, USER: 119,31,a6217842-2cfc-47a4-950e-b7d7359767fe)
+KeyValue(68, USER: 68,17,a65dd13f-cc73-41bd-9594-89aa5c11bc04)
+KeyValue(111, USER: 111,84,945cbffe-6af4-4746-b351-634514fbd0b9)
+KeyValue(15, USER: 15,31,a5ce5318-b481-47af-8a5b-39e6e8c704e0)
+KeyValue(23, USER: 23,83,952b098c-8711-4eee-8ba9-9d26d52094f4)
+KeyValue(33, USER: 33,80,572f09f3-53d2-4e72-aa9f-169971f179f8)
+KeyValue(65, USER: 65,47,ee71871d-ae6e-469b-9369-53a69a8e385b)
+KeyValue(103, USER: 103,12,202077f0-cca9-44eb-b3d1-81152f788e32)
+KeyValue(109, USER: 109,49,62300d63-a092-4d44-ae92-a57906d18c8e)
+KeyValue(104, USER: 104,99,1967cf90-658c-468e-8ab6-973624d0cb31)
+KeyValue(54, USER: 54,38,4ec36f58-5e89-4cc7-8583-2925a850c50f)
+KeyValue(142, USER: 142,39,61e93a57-309b-44f1-893b-1ed47c0eabdc)
+KeyValue(83, USER: 83,44,60e86b44-ed3a-49d6-81a5-6ec35486aff8)
+KeyValue(40, USER: 40,44,8917b495-c083-4cce-8349-b60560b5c3bb)
+KeyValue(77, USER: 77,28,08542555-9f3f-46cf-a4a9-51b47d5eab67)
+KeyValue(17, USER: 17,98,3b81069b-7343-47e7-ab39-184477d01ec6)
+KeyValue(76, USER: 76,38,246ab2e8-f87c-4fe9-9b52-9b5049c53ec5)
+KeyValue(32, USER: 32,70,74dd8313-9a04-4b04-8abe-3095989da52e)
+KeyValue(41, USER: 41,72,9c382883-124c-479f-812b-3ba733e48a38)
+KeyValue(122, USER: 122,84,1334256f-1265-40d1-a4b7-c051a2d6f5b8)
+KeyValue(9, USER: 9,81,dd9784a2-1a5e-4972-8d6a-af6a69f568c6)
+KeyValue(127, USER: 127,58,cb730229-597d-4950-b3df-79170293ec80)
+KeyValue(106, USER: 106,62,8002939c-4d2f-4918-8e31-aa5eac50e816)
+KeyValue(86, USER: 86,50,4af0b37b-bcb9-42d5-9023-b44dcd49b31f)
+KeyValue(27, USER: 27,23,4b4fc341-82a2-45e9-b4de-bdc81393c52c)
+KeyValue(50, USER: 50,41,9d02cb79-503d-453a-9ba5-017e2d9d6ed1)
+KeyValue(133, USER: 133,80,ea8a3cef-48d5-4cc1-9a08-50f5aa008b53)
+KeyValue(75, USER: 75,34,9987824a-d199-49b5-a373-cfd88c6790f4)
+KeyValue(117, USER: 117,46,7d3b00e0-9395-43cd-af6c-a50be0d37689)
+KeyValue(123, USER: 123,99,c6acf141-6c81-42c7-9e0f-7bb5731d715f)
+KeyValue(11, USER: 11,54,d8c5fd5d-bf4e-42e0-840c-ae11e457718c)
+KeyValue(1, USER: 1,32,1fd84c2e-e457-41a9-b704-da851c975db6)
+KeyValue(31, USER: 31,37,0fef53f3-66b2-46cf-a09d-f2b1f6a91133)
+KeyValue(36, USER: 36,66,cdb91042-0c0a-40e1-a711-057e50c99fc3)
+KeyValue(134, USER: 134,89,5c48df2e-c09a-40f5-b4ab-9630c2c56134)
+KeyValue(2, USER: 2,13,149949c0-b123-4613-a58e-8a4e9182453b)
+KeyValue(91, USER: 91,28,027fef49-5380-41bf-8c24-99c011e36631)
+KeyValue(26, USER: 26,73,a0a8a0cc-5fcf-4167-8b2a-7a793438a608)
+KeyValue(141, USER: 141,11,a66b344a-6715-428d-886b-e38b5f3e064d)
+KeyValue(110, USER: 110,10,c25bc66d-67ae-47a2-8507-6c3f06aca5bb)
+KeyValue(116, USER: 116,14,dbd9f5a9-a732-4aa1-a77a-fe0a4c10602d)
+KeyValue(13, USER: 13,27,446ff5b6-97d3-4028-9e06-d37302a2bb16)
+KeyValue(59, USER: 59,93,f9eeedbe-c970-4065-903b-ea6391c5a086)
+KeyValue(7, USER: 7,78,49ae766e-576c-4d6b-aede-57258761dd8a)
+KeyValue(66, USER: 66,36,cc005c37-fb4e-468d-8b74-4a77f425130d)
+KeyValue(36, USER: 36,16,6b8faa1d-f628-4cf5-896a-7e2b5f197932)
+KeyValue(137, USER: 137,82,293fd7a5-1bb5-48a3-a36d-4c96f2d35f07)
+KeyValue(107, USER: 107,14,57578969-efee-4b33-a247-6696b2d825fb)
+KeyValue(85, USER: 85,34,32dcd501-8b99-4bbd-9407-461c1c5b9358)
+KeyValue(135, USER: 135,36,6a6fe72c-118b-444b-8d3c-2553a5024386)
+KeyValue(109, USER: 109,15,8007bfe2-59de-4718-891e-583a22865d2c)
+KeyValue(1, USER: 1,77,004ca446-41ba-4e7c-b190-95642bf6f168)
+KeyValue(26, USER: 26,67,f1577cc5-adfc-49ff-a619-850fdb0355ae)
+KeyValue(141, USER: 141,13,40ef8ba3-198b-419c-a894-3fb51ee747ee)
+KeyValue(136, USER: 136,57,83e40fd9-a2b7-4f21-83c9-99fec5b39cd0)
+KeyValue(127, USER: 127,48,e06b99c3-a228-4a4d-9560-f1b0291403e1)
+KeyValue(97, USER: 97,86,e6e3978a-159c-4fab-98e3-d01dcd4fe32c)
+KeyValue(57, USER: 57,13,d475956e-5e6b-4060-a84d-7952205609c7)
+KeyValue(96, USER: 96,29,a83586c3-de79-4aa1-8fb9-626c1c5e4ca8)
+KeyValue(94, USER: 94,77,51cbdc3c-6ee2-45a3-a76e-187369e6915d)
+KeyValue(99, USER: 99,65,9b8afc03-e375-4ea4-8464-cb1fbed2e25a)
+KeyValue(117, USER: 117,60,b99f71ed-377f-4990-aaf4-bf7ee778f005)
+KeyValue(10, USER: 10,25,a7656d5d-bed1-4ef7-aea3-1f890e5602b5)
+KeyValue(80, USER: 80,90,c88fc63f-aead-40fc-8a9b-02e54fee8e11)
+KeyValue(31, USER: 31,74,97209b10-92ab-4d56-9fe2-a210b9b0287a)
+KeyValue(38, USER: 38,83,f71cac2d-f09e-4432-bc30-f804633d3739)
+KeyValue(30, USER: 30,18,5fc809c8-65c5-4a5c-84a4-6f9c61e49e37)
+KeyValue(45, USER: 45,14,a1d0801f-c07b-40df-a6ee-764d498b946e)
+KeyValue(72, USER: 72,22,2b52b176-743e-4003-86b5-f4d5677a80c2)
+KeyValue(90, USER: 90,43,edf23a71-6da6-4cdc-9bf1-c7402f40fb32)
+KeyValue(29, USER: 29,48,21d269c7-924f-4d0f-82e3-a82fa5337bc0)
+KeyValue(106, USER: 106,86,5e0a64a9-c613-4edc-92fa-96eea59d68a9)
+KeyValue(56, USER: 56,61,2107f321-9f0e-496d-9071-1672089b1040)
+KeyValue(147, USER: 147,80,0fb6dc99-729b-4083-b886-8c40e903bb55)
+KeyValue(61, USER: 61,30,6e4f2b98-05d2-4551-a741-49d870f2cfd2)
+KeyValue(108, USER: 108,23,c0c37138-c09a-48ae-a1b0-43a88cb5cf55)
+KeyValue(100, USER: 100,50,f96c2a88-dee4-406c-beff-841dd7086e0d)
+KeyValue(2, USER: 2,12,00b29233-dbd4-4a57-82bc-12eb8f136b62)
+KeyValue(133, USER: 133,74,fab417c7-1d8d-4907-b958-b8eb784d78a8)
+KeyValue(15, USER: 15,81,26b77c17-9a51-48ae-8818-412096387b3e)
+KeyValue(9, USER: 9,65,60731529-0d0b-461f-8f71-ea5f5dec70c7)
+KeyValue(33, USER: 33,85,5c584179-a69d-4066-af81-47d135e0af12)
+KeyValue(89, USER: 89,27,6548cad6-a7cc-4dcd-bca2-b6c858f3a62b)
+KeyValue(145, USER: 145,14,10078d51-7e64-48d0-a564-d77b0a5c1f82)
+KeyValue(8, USER: 8,19,bc65d13c-a88d-472b-b2fe-e286948d8ede)
+KeyValue(128, USER: 128,97,bdfc68a8-887b-4dff-acf5-c334301a41df)
+KeyValue(19, USER: 19,18,6373e9ef-59de-42e3-8402-8f3c3500c46f)
+KeyValue(55, USER: 55,44,b6adb379-9ff6-4c56-a9f8-95248a347549)
+KeyValue(13, USER: 13,13,35e05875-c57e-429d-9c9b-ca216197db0a)
+KeyValue(21, USER: 21,20,53c9be05-06fc-4a51-b0f6-1f216f3a7662)
+KeyValue(6, USER: 6,25,6aeb77f2-28b9-494f-b133-381b1a8739b0)
+KeyValue(5, USER: 5,63,c90248c3-0284-40cb-9159-422d80393b81)
+KeyValue(115, USER: 115,94,db0fdf4e-5461-4057-9729-1bb7ba31a996)
+KeyValue(78, USER: 78,86,6cca259b-fb7c-4679-a1bf-aa769439c9bc)
+KeyValue(88, USER: 88,22,6345cce6-b0f4-4810-9ac4-5b99fb9c1960)
+KeyValue(32, USER: 32,23,140ddc5a-6e2b-4f58-9a4a-d241cb2bb22f)
+KeyValue(116, USER: 116,34,84038d3c-d052-44f7-8434-dbaab1796847)
+KeyValue(69, USER: 69,41,9e3f086e-80aa-428f-9a1c-e988f77455da)
+KeyValue(75, USER: 75,45,78d6848c-cb8f-46af-a4c5-0766e87dec12)
+KeyValue(102, USER: 102,16,314e9612-19ec-498e-aeef-f3dc67d2aa73)
+KeyValue(37, USER: 37,54,ceb123d4-b7a8-4b44-b61f-451994e92847)
+KeyValue(41, USER: 41,59,8a2bd2ad-9dc3-4996-91d3-4975daea133d)
+KeyValue(93, USER: 93,37,fcaf65c2-fdcc-429f-8c4d-43750b2ba56b)
+KeyValue(47, USER: 47,26,1a59c354-7e53-44d3-8031-285dc3fdebb1)
+KeyValue(112, USER: 112,78,3a29ec8f-8634-4a67-b71c-3afc8b300d2b)
+KeyValue(144, USER: 144,86,855a62c0-9f25-4db5-a1b1-30c2afc36a55)
+KeyValue(76, USER: 76,15,60677dba-2ae3-4487-9148-c861a8f057ba)
+KeyValue(48, USER: 48,90,caabffc1-454b-4189-919f-e3d35b5ee6b3)
+KeyValue(71, USER: 71,30,8fc563f5-dafb-45ec-85d0-3e22d7d2e895)
+KeyValue(17, USER: 17,10,2165790c-3e66-4625-be10-7ae25d8f1d84)
+KeyValue(103, USER: 103,89,0e0fd3a9-ed57-4835-aa1d-1b7c7c5b6f29)
+KeyValue(83, USER: 83,76,ff5f10df-da74-498f-ac2e-ba3faf68ae7d)
+KeyValue(138, USER: 138,60,0bd33144-3baa-4100-9f63-255ea05f994e)
+KeyValue(23, USER: 23,76,09be7751-a19f-4f6b-acce-e7f19013f7cb)
+KeyValue(63, USER: 63,40,95551409-b590-4b20-8536-548048d5bb20)
+KeyValue(122, USER: 122,43,3c1f7a28-a375-4477-afc9-bcbf01fa04a2)
+KeyValue(35, USER: 35,13,d5228f0b-8f3d-4a14-a746-8e488a9aeef4)
+KeyValue(54, USER: 54,82,7ea7068a-5a7c-40d5-8793-27133b39cf71)
+KeyValue(52, USER: 52,51,dfe6774e-1e12-4805-a21b-40d1b3e9f97f)
+KeyValue(126, USER: 126,12,cef3f880-39a0-41f3-a5b4-4c3db9060fd3)
+KeyValue(42, USER: 42,48,2c21c729-c162-413c-96e6-e7ee660a2d7f)
+KeyValue(62, USER: 62,34,29e94325-7d2d-4880-aa7a-93a16695adee)
+KeyValue(14, USER: 14,36,0413f03f-4b74-441a-bf03-142dca929bd9)
+KeyValue(74, USER: 74,31,12fcc524-7252-4992-b112-ab4e94e806aa)
+KeyValue(118, USER: 118,17,e94ecde6-84a8-4863-b730-286906256394)
+KeyValue(124, USER: 124,17,92539cc4-cdb1-4873-9c9e-35256dd8ce54)
+KeyValue(46, USER: 46,24,8a082be3-ebe3-41f9-9325-201ea694c6fc)
+KeyValue(87, USER: 87,63,9adbcea8-17bf-48b0-816b-0a324569b343)
+KeyValue(132, USER: 132,17,2f93112e-b884-4d34-9140-ca2fef335706)
+KeyValue(125, USER: 125,96,29ff87dd-3a30-4412-a618-3111aa91bcd1)
+KeyValue(40, USER: 40,29,eac098dd-a409-4ea1-a60e-b42a9658d7e6)
+KeyValue(11, USER: 11,60,5357576f-0e70-49b3-be1a-c101c11a08a7)
+KeyValue(86, USER: 86,72,35b75858-ac3f-4c24-a1f8-d76355af8b94)
+KeyValue(92, USER: 92,31,44c5a6b8-b2de-41dc-b13e-f00d437d346b)
+KeyValue(104, USER: 104,29,b03af1c5-3c20-4d67-8ca3-a655a27f5474)
+KeyValue(149, USER: 149,75,bf7ce5d2-cb16-4540-b5e8-4dad26f78798)
+KeyValue(70, USER: 70,49,04a1ed0e-def6-411d-8c1b-24d0a0dfabad)
+KeyValue(79, USER: 79,43,e9f5e413-5422-4d78-bfdd-a45fe6f1c4f1)
+KeyValue(65, USER: 65,91,ba3265ba-e21a-4ab5-af8f-bf9bb4e0244e)
+KeyValue(60, USER: 60,86,6d816308-b222-455d-878f-52ae3c881dd9)
+KeyValue(121, USER: 121,44,9281af68-f7b9-4124-baa7-6b3c23e25c0f)
+KeyValue(77, USER: 77,78,e1cb77a2-b6b7-4efa-a480-9f940f8358cd)
+KeyValue(22, USER: 22,19,188ac5af-8b18-4bd3-9aea-931afe90ee7a)
+KeyValue(105, USER: 105,39,2ca91ebb-677a-464e-bdb0-9900768f246c)
+KeyValue(0, USER: 0,65,70d6d6c2-5e17-4d30-9cd0-428a4ed31b7d)
+KeyValue(98, USER: 98,52,29f1a764-0b20-4a01-83ee-06d9daad9476)
+KeyValue(114, USER: 114,64,c9aec4a6-5dc4-46d5-82f1-7547c2fde91b)
+KeyValue(49, USER: 49,52,0a3118f3-aa8d-435e-844d-779f68d9d4af)
+KeyValue(59, USER: 59,67,aed48c1c-1c3d-4a9e-aacd-ee845e28dddf)
+KeyValue(3, USER: 3,91,2b7fc10d-1efd-46ee-a2ba-f916d8931b56)
+KeyValue(140, USER: 140,40,a63e087b-760f-46c9-bf14-9d9ec52eaa3d)
+KeyValue(73, USER: 73,22,01b4bad1-0ae8-4b4d-8ccf-e5272bd348b4)
+KeyValue(39, USER: 39,39,92b1ee16-3827-4340-a4c6-b8fad159fbeb)
+KeyValue(16, USER: 16,57,4a9f418c-ee0b-422b-ad44-0e84923701f9)
+KeyValue(84, USER: 84,86,c010f83c-e153-4bae-93a1-24c5bbfff589)
+KeyValue(64, USER: 64,37,dd795a35-5e8c-402b-a780-9a5c03fc5627)
+KeyValue(139, USER: 139,43,eda3f844-b25f-4665-8998-0e0fabdc85d6)
+KeyValue(51, USER: 51,74,5b982969-dd8d-47a5-a10f-736527c3f341)
+KeyValue(18, USER: 18,20,338d4675-eae9-4afb-8272-d562e4df19a2)
+KeyValue(134, USER: 134,65,f333ddd1-893f-483d-985a-f1f4d973970a)
+KeyValue(142, USER: 142,11,5092e39a-3e03-4868-8444-0dcc1e275a28)
+KeyValue(120, USER: 120,80,49845b0b-2d09-4244-af35-56ac29033ce2)
+KeyValue(58, USER: 58,69,b4188b41-0a03-4dcd-b7c1-8382b0436264)
+KeyValue(131, USER: 131,73,896edfef-f959-4bfd-93f8-024ba8cdcac1)
+KeyValue(91, USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead)
+KeyValue(28, USER: 28,27,db172e0d-09e7-4022-b820-1021f094b0ff)
+KeyValue(130, USER: 130,25,75449770-b0ff-4f52-8f62-73ac291e41c3)
+KeyValue(129, USER: 129,67,ca9b5e0e-edf2-4611-a4d1-6f2e49c52fa2)
+KeyValue(53, USER: 53,62,bb54eec4-3a90-47b3-b0fd-60ff6c2265b8)
+KeyValue(146, USER: 146,47,178ff53f-5a95-4a35-af58-4a1fbc6cd2f9)
+KeyValue(20, USER: 20,98,e4715fea-291d-41d6-9c9d-15a6a26a2f9b)
+KeyValue(119, USER: 119,28,415de640-0850-406c-9153-fcbd8a07e60f)
+KeyValue(68, USER: 68,59,5bee2cbb-c46a-450d-a87c-4e500a02bb27)
+KeyValue(82, USER: 82,76,26cc96bb-e0c9-4146-9766-f28405f59e9c)
+KeyValue(95, USER: 95,34,d4816bf1-303d-4735-a5cd-fd654a9bd748)
+KeyValue(34, USER: 34,26,c1f83f49-9a24-4e15-b718-5b7fb2d42f88)
+KeyValue(27, USER: 27,43,eb7b6647-f979-4d3c-9b05-286bddeefe3c)
+KeyValue(50, USER: 50,55,c5df2627-f89b-41cb-ac0d-3e95e0689409)
+KeyValue(24, USER: 24,46,d636c247-95e2-4eb3-8587-3d06870ed011)
+KeyValue(110, USER: 110,34,8bd87676-c549-477f-b9cb-bc96a6dd162d)
+KeyValue(12, USER: 12,15,31d5c0c7-fce2-4762-a56b-ef15137c1183)
+KeyValue(7, USER: 7,87,95160d65-186f-4ac5-aa11-67b8834e2798)
+KeyValue(113, USER: 113,65,4de04b2a-f624-4ac0-93ee-c95acacb299f)
+KeyValue(4, USER: 4,28,470896ba-9fdf-4182-a7a9-17f20878c55f)
+KeyValue(81, USER: 81,79,57e8eae9-4bcd-42ab-848e-48429002bfce)
+KeyValue(148, USER: 148,93,a9d96fb6-6d06-485b-aa17-1cd575808d1c)
+KeyValue(43, USER: 43,24,5fe5e93b-c283-47c1-b6c7-4a03f95380dc)
+KeyValue(101, USER: 101,87,7a2fb29e-8e7f-4063-8376-9bc4ef14df66)
+KeyValue(143, USER: 143,23,ff006bc0-707a-4489-b422-c77bc36b12fa)
+KeyValue(25, USER: 25,67,d498f765-ce2d-450a-9c07-09f953e5493f)
+KeyValue(111, USER: 111,42,bb92f314-8bbb-4b6d-9c14-fa68738c8d80)
+KeyValue(44, USER: 44,50,32aa5670-a654-46ee-875c-7ca9afeee1fa)
+KeyValue(67, USER: 67,93,8b8fe613-f7de-4141-a3e7-aa00cc4c58dc)
+KeyValue(123, USER: 123,97,ffc709fc-e8d5-447e-b1bf-3c8161b50bfa)
 output count = 300
 
 dict count = 150
 Actual:
-USER: 88,22,6345cce6-b0f4-4810-9ac4-5b99fb9c1960
-USER: 89,27,6548cad6-a7cc-4dcd-bca2-b6c858f3a62b
-USER: 110,34,8bd87676-c549-477f-b9cb-bc96a6dd162d
-USER: 111,42,bb92f314-8bbb-4b6d-9c14-fa68738c8d80
-USER: 112,78,3a29ec8f-8634-4a67-b71c-3afc8b300d2b
-USER: 113,65,4de04b2a-f624-4ac0-93ee-c95acacb299f
-USER: 114,64,c9aec4a6-5dc4-46d5-82f1-7547c2fde91b
-USER: 115,94,db0fdf4e-5461-4057-9729-1bb7ba31a996
-USER: 116,34,84038d3c-d052-44f7-8434-dbaab1796847
-USER: 117,60,b99f71ed-377f-4990-aaf4-bf7ee778f005
-USER: 90,43,edf23a71-6da6-4cdc-9bf1-c7402f40fb32
-USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead
-USER: 118,17,e94ecde6-84a8-4863-b730-286906256394
-USER: 119,28,415de640-0850-406c-9153-fcbd8a07e60f
-USER: 92,31,44c5a6b8-b2de-41dc-b13e-f00d437d346b
-USER: 93,37,fcaf65c2-fdcc-429f-8c4d-43750b2ba56b
-USER: 94,77,51cbdc3c-6ee2-45a3-a76e-187369e6915d
-USER: 95,34,d4816bf1-303d-4735-a5cd-fd654a9bd748
-USER: 96,29,a83586c3-de79-4aa1-8fb9-626c1c5e4ca8
-USER: 97,86,e6e3978a-159c-4fab-98e3-d01dcd4fe32c
-USER: 10,25,a7656d5d-bed1-4ef7-aea3-1f890e5602b5
-USER: 98,52,29f1a764-0b20-4a01-83ee-06d9daad9476
-USER: 99,65,9b8afc03-e375-4ea4-8464-cb1fbed2e25a
-USER: 11,60,5357576f-0e70-49b3-be1a-c101c11a08a7
-USER: 12,15,31d5c0c7-fce2-4762-a56b-ef15137c1183
-USER: 13,13,35e05875-c57e-429d-9c9b-ca216197db0a
-USER: 14,36,0413f03f-4b74-441a-bf03-142dca929bd9
-USER: 15,81,26b77c17-9a51-48ae-8818-412096387b3e
-USER: 16,57,4a9f418c-ee0b-422b-ad44-0e84923701f9
-USER: 17,10,2165790c-3e66-4625-be10-7ae25d8f1d84
-USER: 18,20,338d4675-eae9-4afb-8272-d562e4df19a2
-USER: 19,18,6373e9ef-59de-42e3-8402-8f3c3500c46f
-USER: 120,80,49845b0b-2d09-4244-af35-56ac29033ce2
-USER: 121,44,9281af68-f7b9-4124-baa7-6b3c23e25c0f
-USER: 0,65,70d6d6c2-5e17-4d30-9cd0-428a4ed31b7d
-USER: 1,77,004ca446-41ba-4e7c-b190-95642bf6f168
-USER: 122,43,3c1f7a28-a375-4477-afc9-bcbf01fa04a2
-USER: 123,97,ffc709fc-e8d5-447e-b1bf-3c8161b50bfa
-USER: 2,12,00b29233-dbd4-4a57-82bc-12eb8f136b62
-USER: 124,17,92539cc4-cdb1-4873-9c9e-35256dd8ce54
-USER: 3,91,2b7fc10d-1efd-46ee-a2ba-f916d8931b56
-USER: 4,28,470896ba-9fdf-4182-a7a9-17f20878c55f
-USER: 125,96,29ff87dd-3a30-4412-a618-3111aa91bcd1
-USER: 126,12,cef3f880-39a0-41f3-a5b4-4c3db9060fd3
-USER: 5,63,c90248c3-0284-40cb-9159-422d80393b81
-USER: 127,48,e06b99c3-a228-4a4d-9560-f1b0291403e1
-USER: 6,25,6aeb77f2-28b9-494f-b133-381b1a8739b0
-USER: 128,97,bdfc68a8-887b-4dff-acf5-c334301a41df
-USER: 7,87,95160d65-186f-4ac5-aa11-67b8834e2798
-USER: 8,19,bc65d13c-a88d-472b-b2fe-e286948d8ede
-USER: 129,67,ca9b5e0e-edf2-4611-a4d1-6f2e49c52fa2
-USER: 9,65,60731529-0d0b-461f-8f71-ea5f5dec70c7
-USER: 20,98,e4715fea-291d-41d6-9c9d-15a6a26a2f9b
-USER: 21,20,53c9be05-06fc-4a51-b0f6-1f216f3a7662
-USER: 22,19,188ac5af-8b18-4bd3-9aea-931afe90ee7a
-USER: 23,76,09be7751-a19f-4f6b-acce-e7f19013f7cb
-USER: 24,46,d636c247-95e2-4eb3-8587-3d06870ed011
-USER: 25,67,d498f765-ce2d-450a-9c07-09f953e5493f
-USER: 26,67,f1577cc5-adfc-49ff-a619-850fdb0355ae
-USER: 27,43,eb7b6647-f979-4d3c-9b05-286bddeefe3c
-USER: 28,27,db172e0d-09e7-4022-b820-1021f094b0ff
-USER: 29,48,21d269c7-924f-4d0f-82e3-a82fa5337bc0
-USER: 130,25,75449770-b0ff-4f52-8f62-73ac291e41c3
-USER: 131,73,896edfef-f959-4bfd-93f8-024ba8cdcac1
-USER: 132,17,2f93112e-b884-4d34-9140-ca2fef335706
-USER: 133,74,fab417c7-1d8d-4907-b958-b8eb784d78a8
-USER: 134,65,f333ddd1-893f-483d-985a-f1f4d973970a
-USER: 135,36,6a6fe72c-118b-444b-8d3c-2553a5024386
-USER: 136,57,83e40fd9-a2b7-4f21-83c9-99fec5b39cd0
-USER: 137,82,293fd7a5-1bb5-48a3-a36d-4c96f2d35f07
-USER: 138,60,0bd33144-3baa-4100-9f63-255ea05f994e
-USER: 139,43,eda3f844-b25f-4665-8998-0e0fabdc85d6
-USER: 30,18,5fc809c8-65c5-4a5c-84a4-6f9c61e49e37
-USER: 31,74,97209b10-92ab-4d56-9fe2-a210b9b0287a
-USER: 32,23,140ddc5a-6e2b-4f58-9a4a-d241cb2bb22f
-USER: 33,85,5c584179-a69d-4066-af81-47d135e0af12
-USER: 34,26,c1f83f49-9a24-4e15-b718-5b7fb2d42f88
-USER: 35,13,d5228f0b-8f3d-4a14-a746-8e488a9aeef4
-USER: 36,16,6b8faa1d-f628-4cf5-896a-7e2b5f197932
-USER: 37,54,ceb123d4-b7a8-4b44-b61f-451994e92847
-USER: 38,83,f71cac2d-f09e-4432-bc30-f804633d3739
-USER: 39,39,92b1ee16-3827-4340-a4c6-b8fad159fbeb
-USER: 140,40,a63e087b-760f-46c9-bf14-9d9ec52eaa3d
-USER: 141,13,40ef8ba3-198b-419c-a894-3fb51ee747ee
-USER: 142,11,5092e39a-3e03-4868-8444-0dcc1e275a28
-USER: 143,23,ff006bc0-707a-4489-b422-c77bc36b12fa
-USER: 144,86,855a62c0-9f25-4db5-a1b1-30c2afc36a55
-USER: 145,14,10078d51-7e64-48d0-a564-d77b0a5c1f82
-USER: 146,47,178ff53f-5a95-4a35-af58-4a1fbc6cd2f9
-USER: 147,80,0fb6dc99-729b-4083-b886-8c40e903bb55
-USER: 148,93,a9d96fb6-6d06-485b-aa17-1cd575808d1c
-USER: 149,75,bf7ce5d2-cb16-4540-b5e8-4dad26f78798
-USER: 40,29,eac098dd-a409-4ea1-a60e-b42a9658d7e6
-USER: 41,59,8a2bd2ad-9dc3-4996-91d3-4975daea133d
-USER: 42,48,2c21c729-c162-413c-96e6-e7ee660a2d7f
-USER: 43,24,5fe5e93b-c283-47c1-b6c7-4a03f95380dc
-USER: 44,50,32aa5670-a654-46ee-875c-7ca9afeee1fa
-USER: 45,14,a1d0801f-c07b-40df-a6ee-764d498b946e
-USER: 46,24,8a082be3-ebe3-41f9-9325-201ea694c6fc
-USER: 47,26,1a59c354-7e53-44d3-8031-285dc3fdebb1
-USER: 48,90,caabffc1-454b-4189-919f-e3d35b5ee6b3
-USER: 49,52,0a3118f3-aa8d-435e-844d-779f68d9d4af
-USER: 50,55,c5df2627-f89b-41cb-ac0d-3e95e0689409
-USER: 51,74,5b982969-dd8d-47a5-a10f-736527c3f341
-USER: 52,51,dfe6774e-1e12-4805-a21b-40d1b3e9f97f
-USER: 53,62,bb54eec4-3a90-47b3-b0fd-60ff6c2265b8
-USER: 54,82,7ea7068a-5a7c-40d5-8793-27133b39cf71
-USER: 55,44,b6adb379-9ff6-4c56-a9f8-95248a347549
-USER: 56,61,2107f321-9f0e-496d-9071-1672089b1040
-USER: 57,13,d475956e-5e6b-4060-a84d-7952205609c7
-USER: 58,69,b4188b41-0a03-4dcd-b7c1-8382b0436264
-USER: 59,67,aed48c1c-1c3d-4a9e-aacd-ee845e28dddf
-USER: 60,86,6d816308-b222-455d-878f-52ae3c881dd9
-USER: 61,30,6e4f2b98-05d2-4551-a741-49d870f2cfd2
-USER: 62,34,29e94325-7d2d-4880-aa7a-93a16695adee
-USER: 63,40,95551409-b590-4b20-8536-548048d5bb20
-USER: 64,37,dd795a35-5e8c-402b-a780-9a5c03fc5627
-USER: 65,91,ba3265ba-e21a-4ab5-af8f-bf9bb4e0244e
-USER: 66,36,cc005c37-fb4e-468d-8b74-4a77f425130d
-USER: 67,93,8b8fe613-f7de-4141-a3e7-aa00cc4c58dc
-USER: 68,59,5bee2cbb-c46a-450d-a87c-4e500a02bb27
-USER: 69,41,9e3f086e-80aa-428f-9a1c-e988f77455da
-USER: 70,49,04a1ed0e-def6-411d-8c1b-24d0a0dfabad
-USER: 71,30,8fc563f5-dafb-45ec-85d0-3e22d7d2e895
-USER: 72,22,2b52b176-743e-4003-86b5-f4d5677a80c2
-USER: 73,22,01b4bad1-0ae8-4b4d-8ccf-e5272bd348b4
-USER: 74,31,12fcc524-7252-4992-b112-ab4e94e806aa
-USER: 75,45,78d6848c-cb8f-46af-a4c5-0766e87dec12
-USER: 76,15,60677dba-2ae3-4487-9148-c861a8f057ba
-USER: 77,78,e1cb77a2-b6b7-4efa-a480-9f940f8358cd
-USER: 78,86,6cca259b-fb7c-4679-a1bf-aa769439c9bc
-USER: 79,43,e9f5e413-5422-4d78-bfdd-a45fe6f1c4f1
-USER: 100,50,f96c2a88-dee4-406c-beff-841dd7086e0d
-USER: 101,87,7a2fb29e-8e7f-4063-8376-9bc4ef14df66
-USER: 102,16,314e9612-19ec-498e-aeef-f3dc67d2aa73
-USER: 103,89,0e0fd3a9-ed57-4835-aa1d-1b7c7c5b6f29
-USER: 104,29,b03af1c5-3c20-4d67-8ca3-a655a27f5474
-USER: 105,39,2ca91ebb-677a-464e-bdb0-9900768f246c
-USER: 106,86,5e0a64a9-c613-4edc-92fa-96eea59d68a9
-USER: 107,14,57578969-efee-4b33-a247-6696b2d825fb
-USER: 80,90,c88fc63f-aead-40fc-8a9b-02e54fee8e11
-USER: 108,23,c0c37138-c09a-48ae-a1b0-43a88cb5cf55
-USER: 81,79,57e8eae9-4bcd-42ab-848e-48429002bfce
-USER: 82,76,26cc96bb-e0c9-4146-9766-f28405f59e9c
-USER: 109,15,8007bfe2-59de-4718-891e-583a22865d2c
-USER: 83,76,ff5f10df-da74-498f-ac2e-ba3faf68ae7d
-USER: 84,86,c010f83c-e153-4bae-93a1-24c5bbfff589
-USER: 85,34,32dcd501-8b99-4bbd-9407-461c1c5b9358
-USER: 86,72,35b75858-ac3f-4c24-a1f8-d76355af8b94
-USER: 87,63,9adbcea8-17bf-48b0-816b-0a324569b343
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 36.07 sec <<< FAILURE! - in io.confluent.examples.streams.MergeTest
-shouldMergeOnNhsNumber(io.confluent.examples.streams.MergeTest)  Time elapsed: 31.223 sec  <<< FAILURE!
-java.lang.AssertionError: 
-
-Actual and expected have the same elements but not in the same order, at index 11 actual element was:
-  <USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead>
-whereas expected element was:
-  <USER: 118,17,e94ecde6-84a8-4863-b730-286906256394>
-
-	at io.confluent.examples.streams.MergeTest.shouldMergeOnNhsNumber(MergeTest.java:101)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 40.253 sec - in io.confluent.examples.streams.MergeTest
 
 Results :
 
-Failed tests: 
-  MergeTest.shouldMergeOnNhsNumber:101 
-Actual and expected have the same elements but not in the same order, at index 11 actual element was:
-  <USER: 91,45,14b37631-8fd4-4d2a-b30b-b16359186ead>
-whereas expected element was:
-  <USER: 118,17,e94ecde6-84a8-4863-b730-286906256394>
-
-
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
+[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 40.957 s
-[INFO] Finished at: 2017-03-16T15:51:11+00:00
-[INFO] Final Memory: 38M/622M
+[INFO] Total time: 45.821 s
+[INFO] Finished at: 2017-03-17T09:36:45+00:00
+[INFO] Final Memory: 48M/1058M
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project streams-examples: There are test failures.
-[ERROR] 
-[ERROR] Please refer to /home/jamie/Git/KafkaExamples/kafka-streams/target/surefire-reports for the individual test results.
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

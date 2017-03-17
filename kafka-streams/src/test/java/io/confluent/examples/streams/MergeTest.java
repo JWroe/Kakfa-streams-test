@@ -50,15 +50,12 @@ public class MergeTest {
       stream.forEach((line) -> inputValues.add(personDes.deserialize(line)));
     }
 
-    Map<String, Person> expectedOutput = new HashMap<>();
+    HashMap<String, Person> expectedOutput = new LinkedHashMap<>();
     try (Stream<String> stream = Files.lines(Paths.get(expectedFile))) {
-      
-      stream.forEach((line) -> updateDict(new KeyValue<String, Person>(personDes.deserialize(line).NhsNumber, personDes.deserialize(line)), expectedOutput));
+      stream.forEach((line) -> expectedOutput.put(personDes.deserialize(line).NhsNumber, personDes.deserialize(line)));
     }
 
-    System.out.println("expected -- ");
-    expectedOutput.forEach((key, val) -> System.out.println(val));
-    System.out.println();
+    expectedOutput.forEach((k, v) -> System.out.println(v));
 
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
@@ -76,12 +73,8 @@ public class MergeTest {
     KStreamBuilder builder = new KStreamBuilder();
 
     KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
-        .groupBy((key, value) -> value.NhsNumber)
-        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber, nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
-
-    //users.foreach((key, value) -> System.out.println("\n\ninput - value = " + value));
-    // KStream<String,String> sumat = users.grou
-    // users.foreach((key, value) -> System.out.println("\n\ninput - key = " + key));
+        .groupBy((key, value) -> value.NhsNumber).reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
+            nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
     people.to(stringSerde, personSerde, outputTopic);
 
@@ -90,35 +83,39 @@ public class MergeTest {
 
     produceInputData(inputValues);
 
-    Thread.sleep(15000);
+    Thread.sleep(20000);
 
     List<KeyValue<String, Person>> actualOutput = getOutputData(0);
+    //actualOutput.forEach((item) -> System.out.println(item));
 
-    Map<String, Person> latest = getJustLatestValues(actualOutput);
+    HashMap<String, Person> latest = getJustLatestValues(actualOutput);
 
     System.out.println("Actual:");
-    latest.forEach((key, value) -> System.out.println(value));
+    latest.forEach((k, v) -> System.out.println(v));
 
     assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
 
     streams.close();
   }
 
-  public <T1, T2> Map<T1, T2> getJustLatestValues(List<KeyValue<T1, T2>> actualOutput) {
-    Map<T1, T2> dict = new HashMap<>();
-    actualOutput.forEach((item) -> updateDict(item, dict));
+  public <T1, T2> HashMap<T1, T2> getJustLatestValues(List<KeyValue<T1, T2>> actualOutput) {
+    HashMap<T1, T2> items = new LinkedHashMap<>();
+    actualOutput.forEach((item) -> updateDict(item, items));
     System.out.println("output count = " + actualOutput.size());
     System.out.println();
-    System.out.println("dict count = " + dict.size());
+    System.out.println("dict count = " + items.size());
 
-    return dict;
+    return items;
   }
 
-  public <T1, T2> void updateDict(KeyValue<T1, T2> kv, Map<T1, T2> dict) {
-    if (dict.containsKey(kv.key))
-      dict.replace(kv.key, kv.value);
-    else
-      dict.put(kv.key, kv.value);
+  public <T1, T2> void updateDict(KeyValue<T1, T2> kv, HashMap<T1, T2> uniques) {
+    if (uniques.containsKey(kv.key)) {
+      uniques.remove(kv.key);
+    } else {
+    }
+
+    uniques.put(kv.key, kv.value);
+
   }
 
   public <T extends Object> T nullCoalesce(T first, T second) {
