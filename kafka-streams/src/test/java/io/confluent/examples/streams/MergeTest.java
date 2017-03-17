@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import java.util.stream.*;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.ExecutionException;
 
 import java.nio.file.*;
@@ -40,8 +41,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpaVzM8e.tmp";
-    final String expectedFile = "/tmp/tmpVRmbpa.tmp";
+    final String inputFile = "/tmp/tmp3jZsis.tmp";
+    final String expectedFile = "/tmp/tmpk8QK3J.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -67,15 +68,22 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, new PersonSerde().getClass().getName());
     streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10000);
+    streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
     KStreamBuilder builder = new KStreamBuilder();
 
-    KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
-        .groupBy((key, value) -> value.NhsNumber).reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
-            nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
+    KStream<String, Person> strm = builder.stream(stringSerde, personSerde, inputTopic);
+    KTable<String, Person> people = strm.groupBy((key, value) -> "1")    
+                                        .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
+                                                nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
+    //match against previously merged records, not incoming records
+    // get the key from 
+    //then change merge to be based on event time
+    //then calulate breachs and output to a topic based on merged final record 
+    
     people.to(stringSerde, personSerde, outputTopic);
 
     KafkaStreams streams = new KafkaStreams(builder, streamsConfiguration);
@@ -83,9 +91,9 @@ public class MergeTest {
 
     produceInputData(inputValues);
 
-    Thread.sleep(20000);
+    // TimeUnit.SECONDS.sleep(15);
 
-    List<KeyValue<String, Person>> actualOutput = getOutputData(0);
+    List<KeyValue<String, Person>> actualOutput = getOutputData(1000000);
     //actualOutput.forEach((item) -> System.out.println(item));
 
     HashMap<String, Person> latest = getJustLatestValues(actualOutput);
@@ -146,7 +154,7 @@ public class MergeTest {
     consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PersonSerializer.class);
 
     try {
-      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 5000L);
+      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 50000L);
     } catch (InterruptedException e) {
       System.out.println(e);
       return null;
