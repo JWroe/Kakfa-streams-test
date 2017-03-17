@@ -26,12 +26,13 @@ public class CWTEvent implements Serializable {
     public String CancerReferralTreatmentPeriodStart;
     public String CancerTreatmentStartDate;
 
-    public void update(CWTEvent event){
+    public void update(CWTEvent event) {
         Age = nullCoalesce(event.Age, Age);
         Address = stringCoalesce(event.Address, Address);
         PatientIdentifierPathway = stringCoalesce(event.PatientIdentifierPathway, PatientIdentifierPathway);
-        CancerReferralTreatmentPeriodStart = stringCoalesce(event.CancerReferralTreatmentPeriodStart, CancerReferralTreatmentPeriodStart);
-        CancerTreatmentStartDate = stringCoalesce(event.CancerTreatmentStartDate, CancerTreatmentStartDate);        
+        CancerReferralTreatmentPeriodStart = stringCoalesce(event.CancerReferralTreatmentPeriodStart,
+                CancerReferralTreatmentPeriodStart);
+        CancerTreatmentStartDate = stringCoalesce(event.CancerTreatmentStartDate, CancerTreatmentStartDate);
     }
 
     public <T extends Object> T nullCoalesce(T first, T second) {
@@ -60,26 +61,40 @@ public class CWTEvent implements Serializable {
     }
 
     public boolean matches(CWTEvent other) {
-        return NhsNumber == other.NhsNumber && (PatientIdentifierPathway == other.PatientIdentifierPathway
-                || CancerReferralTreatmentPeriodStart == other.CancerReferralTreatmentPeriodStart
-                || CancerTreatmentStartDate == other.CancerTreatmentStartDate);
+        return NhsNumber.equals(other.NhsNumber) && (PatientIdentifierPathway.equals(other.PatientIdentifierPathway)
+                || CancerReferralTreatmentPeriodStart.equals(other.CancerReferralTreatmentPeriodStart)
+                || CancerTreatmentStartDate.equals(other.CancerTreatmentStartDate));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
+        try {
+            if (o == this) {
+                return true;
+            }
 
-        if (!(o instanceof CWTEvent)) {
+            if (!(o instanceof CWTEvent)) {
+                return false;
+            }
+
+            CWTEvent other = (CWTEvent) o;
+
+            return ((Age != null && Age.equals(other.Age)) || other.Age == null) && Address.equals(other.Address)
+                    && PatientIdentifierPathway.equals(other.PatientIdentifierPathway)
+                    && CancerReferralTreatmentPeriodStart.equals(other.CancerReferralTreatmentPeriodStart)
+                    && CancerTreatmentStartDate.equals(other.CancerTreatmentStartDate)
+                    && NhsNumber.equals(other.NhsNumber);
+
+        } catch (NullPointerException e) {
+            System.out.println("other " + o);
+            System.out.println("Age " + Age);
+            System.out.println("AddressAge " + Address);
+
+            System.out.println("PatientIdentifierPathway " + PatientIdentifierPathway);
+            System.out.println("CancerReferralTreatmentPeriodStart " + CancerReferralTreatmentPeriodStart);
+            System.out.println("NhsNumber " + NhsNumber);
+
             return false;
         }
-
-        CWTEvent other = (CWTEvent) o;
-
-        return ((Age == null && other.Age == null) || Age.equals(other.Age)) && Address.equals(other.Address)
-                && PatientIdentifierPathway.equals(other.PatientIdentifierPathway)
-                && CancerReferralTreatmentPeriodStart.equals(other.CancerReferralTreatmentPeriodStart)
-                && CancerTreatmentStartDate.equals(other.CancerTreatmentStartDate) && NhsNumber.equals(other.NhsNumber);
     }
 }

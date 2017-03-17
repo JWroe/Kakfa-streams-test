@@ -9,23 +9,23 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person withCWTEvent(CWTEvent event){
-        if(NhsNumber == null){
+    public Person withCWTEvent(CWTEvent event) {
+        if (NhsNumber == null) {
             NhsNumber = event.NhsNumber;
         }
-        
+
         int matches = 0;
         for (CWTEvent mergedEvent : MergedEvents) {
-            if(mergedEvent.matches(event)){
+            if (mergedEvent.matches(event)) {
                 matches++;
                 mergedEvent.update(event);
             }
         }
 
-        if(matches == 0){
+        if (matches == 0) {
             MergedEvents.add(event);
         }
-        if(matches > 1){
+        if (matches > 1) {
             //error case
         }
 

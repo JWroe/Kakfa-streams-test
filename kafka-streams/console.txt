@@ -45,9 +45,9 @@
 [WARNING] Multiple versions of scala libraries detected!
 [INFO] /home/jamie/Git/KafkaExamples/kafka-streams/src/test/java:-1: info: compiling
 [INFO] /home/jamie/Git/KafkaExamples/kafka-streams/target/generated-test-sources/test-annotations:-1: info: compiling
-[INFO] Compiling 37 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes at 1489785008533
+[INFO] Compiling 37 source files to /home/jamie/Git/KafkaExamples/kafka-streams/target/test-classes at 1489787143005
 [INFO] prepare-compile in 0 s
-[INFO] compile in 1 s
+[INFO] compile in 0 s
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ streams-examples ---
 
@@ -55,17 +55,50 @@
  T E S T S
 -------------------------------------------------------
 Running io.confluent.examples.streams.MergeTest
-[2017-03-17 21:10:11,605] WARN [main] No meta.properties file under dir /tmp/junit6311388430114778427/junit5968660105646384057/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-17 21:10:11,832] WARN [main] No meta.properties file under dir /tmp/junit6311388430114778427/junit5968660105646384057/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2017-03-17 21:10:12,058] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-17 21:10:12,062] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
-[2017-03-17 21:10:12,082] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
-[2017-03-17 21:10:12,532] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 21:45:45,874] WARN [main] No meta.properties file under dir /tmp/junit4738682327338472251/junit462300209057601520/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-17 21:45:46,091] WARN [main] No meta.properties file under dir /tmp/junit4738682327338472251/junit462300209057601520/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2017-03-17 21:45:46,291] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 21:45:46,295] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 21:45:46,312] WARN [main] Creating the schema topic _schemas using a replication factor of 1, which is less than the desired one of 3. If this is a production environment, it's crucial to add more brokers and increase the replication factor of the topic. (io.confluent.kafka.schemaregistry.storage.KafkaStore)
+[2017-03-17 21:45:46,735] WARN [main] DEPRECATION warning: `listeners` configuration is not configured. Falling back to the deprecated `port` configuration. (io.confluent.rest.Application)
+[2017-03-17 21:45:47,364] WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:42628] caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x15ade3bc9460005, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:230)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.lang.Thread.run(Thread.java:745)
 
-expect 450 records
-Actual: 27252 records
-Just Latest: 10000 records
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 40.098 sec - in io.confluent.examples.streams.MergeTest
+expect 3 records
+0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2
+0,61,e74ebad6-7c4e-4f58-ab0f-5e8d5c4229ed,0
+0,99,6dd0cc4d-be9d-40cc-b13c-61b705195001,1
+Actual: 22 records
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,null,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,null,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,41,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,41,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,null,,1)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,41,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,19,94a7bf21-fc0b-4941-b1e9-151d398210f7,1)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,41,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,19,94a7bf21-fc0b-4941-b1e9-151d398210f7,1)
+KeyValue(f6d87652-b4c0-4b53-b83d-241799778d43, 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,41,cc3164aa-9e0f-47e8-9dbf-1e8cea44f20e,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,99,0ebb7ba4-8486-4ec8-89aa-4f42a560f99c,1)
+KeyValue(f6d87652-b4c0-4b53-b83d-241799778d43, 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,61,e74ebad6-7c4e-4f58-ab0f-5e8d5c4229ed,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,99,0ebb7ba4-8486-4ec8-89aa-4f42a560f99c,1)
+KeyValue(f6d87652-b4c0-4b53-b83d-241799778d43, 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,61,e74ebad6-7c4e-4f58-ab0f-5e8d5c4229ed,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,99,6dd0cc4d-be9d-40cc-b13c-61b705195001,1)
+KeyValue(f6d87652-b4c0-4b53-b83d-241799778d43, 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2)
+KeyValue(94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, 0,61,e74ebad6-7c4e-4f58-ab0f-5e8d5c4229ed,0)
+KeyValue(4cba20d6-663b-4182-840e-ff10c449a2cf, 0,99,6dd0cc4d-be9d-40cc-b13c-61b705195001,1)
+KeyValue(f6d87652-b4c0-4b53-b83d-241799778d43, 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2)
+Just Latest: 3 records
+key: 94704dda-5aaf-4b79-ba89-ddd9ed75ed1d, value: 0,61,e74ebad6-7c4e-4f58-ab0f-5e8d5c4229ed,0
+key: 4cba20d6-663b-4182-840e-ff10c449a2cf, value: 0,99,6dd0cc4d-be9d-40cc-b13c-61b705195001,1
+key: f6d87652-b4c0-4b53-b83d-241799778d43, value: 0,null,e0ca3860-2968-486c-be9e-1d9786c40a30,2
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.441 sec - in io.confluent.examples.streams.MergeTest
 
 Results :
 
@@ -74,7 +107,7 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 46.051 s
-[INFO] Finished at: 2017-03-17T21:10:50+00:00
-[INFO] Final Memory: 38M/605M
+[INFO] Total time: 13.367 s
+[INFO] Finished at: 2017-03-17T21:45:52+00:00
+[INFO] Final Memory: 38M/685M
 [INFO] ------------------------------------------------------------------------

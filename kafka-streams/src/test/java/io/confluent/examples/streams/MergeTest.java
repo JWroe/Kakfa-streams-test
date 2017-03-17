@@ -41,8 +41,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmp1vqK32.tmp";
-    final String expectedFile = "/tmp/tmp8mK8Dc.tmp";
+    final String inputFile = "/tmp/tmp4MX5zt.tmp";
+    final String expectedFile = "/tmp/tmp4bHuLT.tmp";
 
     List<CWTEvent> inputValues = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class MergeTest {
     System.out.println();
     
     System.out.println("expect " + expectedOutput.size() + " records");
-    // expectedOutput.forEach((k, v) -> System.out.println(v));
+    expectedOutput.forEach((k, v) -> System.out.println(v));
 
     final Serde<String> stringSerde = Serdes.String();
     final Serde<Long> longSerde = Serdes.Long();
@@ -71,8 +71,8 @@ public class MergeTest {
     streamsConfiguration.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CLUSTER.bootstrapServers());
     streamsConfiguration.put(StreamsConfig.KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.VALUE_SERDE_CLASS_CONFIG, cwtSerde.getClass().getName());
-    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 1000);
-    // streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
+    streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10000);
+    streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
     streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG, TestUtils.tempDirectory().getAbsolutePath());
 
@@ -96,17 +96,24 @@ public class MergeTest {
     produceInputData(inputValues);
 
     List<KeyValue<String, CWTEvent>> actualOutput = getOutputData(-1);
-    // actualOutput.forEach((item) -> System.out.println(item));
+
+    System.out.println("Actual: " + actualOutput.size() + " records");    
+    actualOutput.forEach((item) -> System.out.println(item));
 
     HashMap<String, CWTEvent> latest = getJustLatestValues(actualOutput);
 
-    System.out.println("Actual: " + actualOutput.size() + " records");
     System.out.println("Just Latest: " + latest.size() + " records");
-    
-    // latest.forEach((k, v) -> System.out.println("key: " + k + ", value: " + v));
+    latest.forEach((k, v) -> System.out.println("key: " + k + ", value: " + v));
 
-    //assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
+    // assertThat(latest.values()).containsExactlyElementsOf(expectedOutput.values());
+    assertThat(latest.size() == expectedOutput.size());
 
+    CWTEvent[] expectedValues = expectedOutput.values().toArray(new CWTEvent[0]);
+    CWTEvent[] actualValues = latest.values().toArray(new CWTEvent[0]);
+
+    for(int i = 0; i < expectedOutput.size(); i++){
+      assertThat(expectedValues[i].equals(actualValues[i]));
+    }
     streams.close();
   }
 
@@ -157,7 +164,7 @@ public class MergeTest {
     consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, CWTEventSerializer.class);
 
     try {
-      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 30000L);
+      return IntegrationTestUtils.waitUntilMinKeyValueRecordsReceived(consumerConfig, outputTopic, size, 1000L);
     } catch (InterruptedException e) {
       System.out.println(e);
       return null;
