@@ -41,8 +41,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmp3jZsis.tmp";
-    final String expectedFile = "/tmp/tmpk8QK3J.tmp";
+    final String inputFile = "/tmp/tmpc4zJ4D.tmp";
+    final String expectedFile = "/tmp/tmpackCeZ.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -74,8 +74,12 @@ public class MergeTest {
 
     KStreamBuilder builder = new KStreamBuilder();
 
-    KStream<String, Person> strm = builder.stream(stringSerde, personSerde, inputTopic);
-    KTable<String, Person> people = strm.groupBy((key, value) -> "1")    
+    KTable<String, Person> people = builder.stream(stringSerde, personSerde, inputTopic)
+                                            .groupBy((key, value) -> value.NhsNumber)
+    //                                         .aggregate(() -> new ArrayList<Person>(),
+    //                                                    (aggKey, newValue, aggValue) -> aggValue.put(), /* adder */
+    // Serdes.Long(), /* serde for aggregate value */
+    // "aggregated-stream-store" /* state store name */);    
                                         .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
                                                 nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
 
