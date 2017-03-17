@@ -156,12 +156,10 @@ public class IntegrationTestUtils {
     while (true) {
       List<KeyValue<K, V>> readData = readKeyValues(topic, consumerConfig);
       accumData.addAll(readData);
-      if (accumData.size() >= expectedNumRecords)
+      if (expectedNumRecords >= 0 && accumData.size() >= expectedNumRecords)
         return accumData;
       if (System.currentTimeMillis() > startTime + waitTime)
-        throw new AssertionError("Expected " +  expectedNumRecords +
-            " but received only " + accumData.size() +
-            " records before timeout " + waitTime + " ms");
+        return accumData;
       Thread.sleep(Math.min(waitTime, 100L));
     }
   }
