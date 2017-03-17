@@ -61,7 +61,7 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
 
     public Person deserialize(String input) {
         String[] parts = input.split(",", -1);
-        return new Person(parts[0], tryParseInt(parts[1]), parts[2]);
+        return new Person(parts[0], tryParseInt(parts[1]), parts[2], parts[3],parts[4],parts[5]);
     }
 
     Integer tryParseInt(String value) {

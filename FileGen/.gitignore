@@ -3,6 +3,7 @@
 project.lock.json
 .DS_Store
 *.pyc
+*.tmp
 
 # Visual Studio Code
 .vscode
@@ -30,3 +31,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.vscode

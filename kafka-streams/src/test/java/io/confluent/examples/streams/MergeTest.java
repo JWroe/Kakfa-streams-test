@@ -41,8 +41,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpaMDjH4.tmp";
-    final String expectedFile = "/tmp/tmpvh71G6.tmp";
+    final String inputFile = "/tmp/tmpCsQIum.tmp";
+    final String expectedFile = "/tmp/tmpvnyIul.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 
@@ -81,7 +81,11 @@ public class MergeTest {
     // Serdes.Long(), /* serde for aggregate value */
     // "aggregated-stream-store" /* state store name */);    
                                         .reduce((aggVal, newVal) -> new Person(aggVal.NhsNumber,
-                                                nullCoalesce(newVal.Age, aggVal.Age), stringCoalesce(newVal.Address, aggVal.Address)), "merged-store");
+                                                nullCoalesce(newVal.Age, aggVal.Age), 
+                                                stringCoalesce(newVal.Address, aggVal.Address), 
+                                                stringCoalesce(newVal.PatientIdentifierPathway, aggVal.PatientIdentifierPathway),
+                                                stringCoalesce(newVal.CancerReferralTreatmentPeriodStart, aggVal.CancerReferralTreatmentPeriodStart),
+                                                stringCoalesce(newVal.CancerTreatmentStartDate, aggVal.CancerTreatmentStartDate)), "merged-store");
 
     //match against previously merged records, not incoming records
     // get the key from 
@@ -97,7 +101,7 @@ public class MergeTest {
 
     // TimeUnit.SECONDS.sleep(15);
 
-    List<KeyValue<String, Person>> actualOutput = getOutputData(1000000);
+    List<KeyValue<String, Person>> actualOutput = getOutputData(100000);
     //actualOutput.forEach((item) -> System.out.println(item));
 
     HashMap<String, Person> latest = getJustLatestValues(actualOutput);

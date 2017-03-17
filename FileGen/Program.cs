@@ -17,16 +17,16 @@ namespace ConsoleApplication
 
             using (var file = new System.IO.StreamWriter(expectedResult))
             {
-                foreach (var person in expectedState.Values.OrderBy(per => per.UpdatedIndex))
+                foreach (var person in expectedState.OrderBy(per => per.UpdatedIndex))
                 {
-                    file.WriteLine(person.ToString());                    
+                    file.WriteLine(person.ToString());
                 }
             }
         }
 
-        public static Dictionary<string, Person> CreateOutputFile()
+        public static HashSet<Person> CreateOutputFile()
         {
-            var dict = new Dictionary<string, Person>();
+            var hashSet = new HashSet<Person>();
 
             var filePath = System.IO.Path.GetTempFileName();
             System.Console.WriteLine("Input file: " + filePath);
@@ -34,31 +34,56 @@ namespace ConsoleApplication
 
             using (var file = new System.IO.StreamWriter(inputFile))
             {
-                for (var i = 0; i < 1000000; i++)
+                for (var i = 0; i < 100000; i++)
                 {
                     var person = GeneratePerson(i);
 
                     file.WriteLine(person.ToString());
 
-                    if (dict.ContainsKey(person.NhsNumber))
-                    {
-                        var stored = dict[person.NhsNumber];
+                    //expecting error
+                    var matches = hashSet.Where(item => item.NhsNumber == person.NhsNumber &&
+                                            (item.PatientPathway == person.PatientPathway ||
+                                            item.ReferralStart == person.ReferralStart ||
+                                            item.TreatmentStart == person.TreatmentStart));
 
-                        stored.Age = person.Age ?? stored.Age;
-                        stored.Address = person.Address ?? stored.Address;
-                        stored.UpdatedIndex = i;
-                    } else {
-                        dict.Add(person.NhsNumber, person);
+                    if (matches.Count() == 1)
+                    {
+                        var match = matches.First();
+                        match.Age = person.Age ?? match.Age;
+                        match.Address = person.Address ?? match.Address;
+                        match.ReferralStart = person.ReferralStart ?? match.ReferralStart;
+                        match.TreatmentStart = person.TreatmentStart ?? match.TreatmentStart;
+                        match.PatientPathway = person.PatientPathway ?? match.PatientPathway;
+
+                        match.UpdatedIndex = i;
+                    }
+                    else if (matches.Count() > 1)
+                    {
+                        throw new NotImplementedException();
+                        foreach (var match in matches)
+                        {
+                            match.Errored = true;
+                            match.UpdatedIndex = i;
+                        }
+                    }
+                    else
+                    {
+                        hashSet.Add(person);
                     }
                 }
             }
 
-            return dict;
+            return hashSet;
         }
 
         public static Person GeneratePerson(int index)
         {
-            return new Person(rand.Next(150).ToString(), RandBool() ? (int?)rand.Next(10, 100) : null, RandBool() ? Guid.NewGuid().ToString() : null, index);
+            return new Person(ranStr(150), RandBool() ? (int?)rand.Next(10, 100) : null, RandBool() ? Guid.NewGuid().ToString() : null, ranStr(3), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), index);
+        }
+
+        public static string ranStr(int max)
+        {
+            return rand.Next(max).ToString();
         }
 
         public static bool RandBool()
@@ -70,19 +95,26 @@ namespace ConsoleApplication
             public string NhsNumber;
             public int? Age;
             public string Address;
+            public string PatientPathway;
+            public string ReferralStart;
+            public string TreatmentStart;
+            public bool Errored;
             public int UpdatedIndex;
 
-            public Person(string nhsNumber, int? age, string address, int updatedIndex)
+            public Person(string nhsNumber, int? age, string address, string patientPathway, string referralStart, string treatmentStart, int updatedIndex)
             {
                 this.NhsNumber = nhsNumber;
                 this.Age = age;
                 this.Address = address;
                 this.UpdatedIndex = updatedIndex;
+                ReferralStart = referralStart;
+                TreatmentStart = treatmentStart;
+                PatientPathway = patientPathway;
             }
 
             public override String ToString()
             {
-                return $"{NhsNumber},{Age},{Address}";
+                return $"{NhsNumber},{Age},{Address},{PatientPathway},{ReferralStart},{TreatmentStart},{Errored}";
             }
         }
     }
