@@ -41,8 +41,8 @@ public class MergeTest {
 
   @Test
   public void shouldMergeOnNhsNumber() throws Exception {
-    final String inputFile = "/tmp/tmpc4zJ4D.tmp";
-    final String expectedFile = "/tmp/tmpackCeZ.tmp";
+    final String inputFile = "/tmp/tmpaMDjH4.tmp";
+    final String expectedFile = "/tmp/tmpvh71G6.tmp";
 
     List<Person> inputValues = new ArrayList<>();
 

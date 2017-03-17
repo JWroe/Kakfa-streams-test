@@ -1,6 +1,11 @@
 package io.confluent.examples.streams;
 
-public class Person {
+import java.io.*;
+
+
+public class Person implements Serializable {
+    private static final long serialVersionUID = 7526472295622776147L;
+
     public Person(String nhsNumber, Integer age, String address) {
         this.NhsNumber = nhsNumber != null ? nhsNumber : "";
         this.Age = age;

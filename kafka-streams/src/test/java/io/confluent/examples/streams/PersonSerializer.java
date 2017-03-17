@@ -4,6 +4,7 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.io.Closeable;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.Map;
@@ -19,17 +20,43 @@ public class PersonSerializer implements Closeable, AutoCloseable, Serializer<Pe
     }
 
     @Override
-    public byte[] serialize(String s, Person user) {
-        String line = String.format(Locale.ROOT, "%s,%s,%s", user.NhsNumber, user.Age, user.Address);
-        return line.getBytes(CHARSET);
+    public byte[] serialize(String s, Person person) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        byte[] yourBytes = null;
+        try {
+            out = new ObjectOutputStream(bos);
+            out.writeObject(person);
+            out.flush();
+            yourBytes = bos.toByteArray();
+            bos.close();
+
+        } catch (IOException ex) {
+            System.out.println("IO Exception on serializing: " + person);
+            System.out.println(ex);
+        }
+        return yourBytes;
     }
 
     @Override
     public Person deserialize(String topic, byte[] bytes) {
-        if (bytes == null) {
+        if(bytes == null){
             return null;
         }
-        return this.deserialize(new String(bytes, CHARSET));
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        ObjectInput in = null;
+        Person person = null;
+        try {
+            in = new ObjectInputStream(bis);
+            Object o = in.readObject();
+            in.close();
+            person = (Person)o;
+        } catch (Exception ex) {
+            System.out.print("exception on deserializing person");
+            System.out.println(ex);            
+        }
+        return person;
     }
 
     public Person deserialize(String input) {
