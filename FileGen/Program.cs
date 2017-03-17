@@ -41,8 +41,8 @@ namespace ConsoleApplication
                     file.WriteLine(person.ToString());
 
                     //expecting error
-                    var matches = hashSet.Where(item => item.NhsNumber == person.NhsNumber &&
-                                            (item.PatientPathway == person.PatientPathway ||
+                    var matches = hashSet.Where(item => item.NhsNumber == person.NhsNumber
+                                            && (item.PatientPathway == person.PatientPathway ||
                                             item.ReferralStart == person.ReferralStart ||
                                             item.TreatmentStart == person.TreatmentStart));
 
