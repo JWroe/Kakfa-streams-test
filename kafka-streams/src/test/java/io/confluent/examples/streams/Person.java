@@ -6,10 +6,13 @@ import java.io.*;
 public class Person implements Serializable {
     private static final long serialVersionUID = 7526472295622776147L;
 
-    public Person(String nhsNumber, Integer age, String address) {
-        this.NhsNumber = nhsNumber != null ? nhsNumber : "";
-        this.Age = age;
-        this.Address = address = address != null ? address : "";
+    public Person(String nhsNumber, Integer age, String address, String patientPathway, String referralStart, String treatmentStart) {
+        NhsNumber = nhsNumber != null ? nhsNumber : "";
+        Address = address = address != null ? address : "";
+        Age = age;
+        PatientIdentifierPathway = patientPathway != null ? patientPathway : "";
+        CancerReferralTreatmentPeriodStart = referralStart != null ? referralStart : "";
+        CancerTreatmentStartDate = treatmentStart != null ? treatmentStart : "";
     }
 
     public String NhsNumber;
@@ -43,7 +46,11 @@ public class Person implements Serializable {
 
         Person other = (Person) o;
 
-        return ((Age == null && other.Age == null) || Age.equals(other.Age)) && Address.equals(other.Address)
+        return ((Age == null && other.Age == null) || Age.equals(other.Age)) 
+                && Address.equals(other.Address)
+                && PatientIdentifierPathway.equals(other.PatientIdentifierPathway)
+                && CancerReferralTreatmentPeriodStart.equals(other.CancerReferralTreatmentPeriodStart)
+                && CancerTreatmentStartDate.equals(other.CancerTreatmentStartDate)
                 && NhsNumber.equals(other.NhsNumber);
     }
 }
