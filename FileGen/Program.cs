@@ -6,6 +6,10 @@ namespace ConsoleApplication
 {
     public class Program
     {
+            
+        public static int amountOfRecords = 10;
+        public static int numberOfPathways = 1;
+        public static int numberOfPeople = 3;
         static Random rand = new Random();
         public static void Main(string[] args)
         {
@@ -34,7 +38,7 @@ namespace ConsoleApplication
 
             using (var file = new System.IO.StreamWriter(inputFile))
             {
-                for (var i = 0; i < 100000; i++)
+                for (var i = 0; i < amountOfRecords; i++)
                 {
                     var person = GeneratePerson(i);
 
@@ -78,7 +82,7 @@ namespace ConsoleApplication
 
         public static Person GeneratePerson(int index)
         {
-            return new Person(ranStr(150), RandBool() ? (int?)rand.Next(10, 100) : null, RandBool() ? Guid.NewGuid().ToString() : null, ranStr(3), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), index);
+            return new Person(ranStr(numberOfPeople), RandBool() ? (int?)rand.Next(10, 100) : null, RandBool() ? Guid.NewGuid().ToString() : null, ranStr(numberOfPathways), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), index);
         }
 
         public static string ranStr(int max)
